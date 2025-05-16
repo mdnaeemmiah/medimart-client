@@ -210,7 +210,7 @@ export default function Navbar() {
   const router = useRouter();
 
   const dashboardRoute =
-    userRole === "mealProvider" ? "/dashboard/provider/providerDashboard" :
+    userRole === "admin" ? "/dashboard/admin/naeem" :
     userRole === "customer" ? "/dashboard/customer/customerDashboard" :
     "/dashboard";
 
@@ -237,7 +237,7 @@ export default function Navbar() {
       {/* Center: Navigation Links */}
       <div className="hidden md:flex space-x-6">
         <Link href="/" className="hover:text-blue-600">Home</Link>
-        <Link href="/medicine" className="hover:text-blue-600">Medicine</Link>
+        <Link href="/medicine" className="hover:text-blue-600">Shop</Link>
         <Link href="/customerPost" className="hover:text-blue-600">Meal-Preference</Link>
         <Link href="/about" className="hover:text-blue-600">About Us</Link>
         <Link href="/contact" className="hover:text-blue-600">Contact Us</Link>
@@ -283,7 +283,7 @@ export default function Navbar() {
         <div className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-md z-10">
           <div className="flex flex-col items-center space-y-4 py-4">
             <Link href="/" className="hover:text-blue-600">Home</Link>
-            <Link href="/providerPost" className="hover:text-blue-600">Meal</Link>
+            <Link href="/medicine" className="hover:text-blue-600">Shop</Link>
             <Link href="/customerPost" className="hover:text-blue-600">Meal-Preference</Link>
             <Link href="/contact" className="hover:text-blue-600">Contact Us</Link>
             <CartContainer />

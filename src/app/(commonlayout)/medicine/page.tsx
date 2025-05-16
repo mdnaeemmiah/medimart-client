@@ -1,9 +1,10 @@
-import React from 'react';
+import MedicineShop from '@/components/modules/home/MedicineShop';
+
 
 const page = () => {
     return (
         <div>
-            <h2>medicine page</h2>
+            <MedicineShop></MedicineShop>
         </div>
     );
 };
