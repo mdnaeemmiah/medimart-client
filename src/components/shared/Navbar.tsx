@@ -346,8 +346,8 @@ return (
       <Link href="/medicine" className="hover:text-blue-600">
         Shop
       </Link>
-      <Link href="/customerPost" className="hover:text-blue-600">
-        Meal-Preference
+      <Link href="/doctor" className="hover:text-blue-600">
+        Doctors
       </Link>
       <Link href="/about" className="hover:text-blue-600">
         About Us
