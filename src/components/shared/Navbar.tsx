@@ -328,12 +328,12 @@ export default function Navbar() {
   };
 
 return (
-  <nav className="flex items-center justify-between px-6 py-4 bg-gray-900 text-white shadow-md relative">
+<div className="flex items-center justify-between px-6 py-4 bg-gray-900 text-white shadow-md relative">
+    <nav className="flex items-center justify-between container mx-auto">
     {/* Left Side: Logo */}
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2  ">
       <Link href="/" className="flex items-center gap-2">
         <Image height={40} width={40} src={img1} alt="image" />
-        <span className="text-lg font-bold">Medicine Hub</span>
       </Link>
     </div>
 
@@ -421,6 +421,7 @@ return (
       </div>
     )}
   </nav>
+</div>
 );
 
 }
