@@ -35,6 +35,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout } from "@/redux/features/auth/authSlice";
 import img1 from "../../app/assets/img1.png";
 import { useRouter } from "next/navigation";
+import Theme from "./Theme";
 
 const { useBreakpoint } = Grid;
 const { Title, Text } = Typography;
@@ -355,7 +356,9 @@ return (
         Contact Us
       </Link>
       <CartContainer />
+    <Theme></Theme>
     </div>
+
 
     {/* Right Side: User/Auth & Hamburger Menu */}
     <div className="flex items-center gap-4">
