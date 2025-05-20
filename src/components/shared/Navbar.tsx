@@ -329,7 +329,7 @@ export default function Navbar() {
   };
 
 return (
-<div className="flex items-center justify-between px-6 py-4 bg-gray-900 text-white shadow-md relative">
+<div className="flex items-center justify-between px-6 py-4  shadow-md relative">
     <nav className="flex items-center justify-between container mx-auto">
     {/* Left Side: Logo */}
     <div className="flex items-center gap-2  ">
@@ -356,12 +356,12 @@ return (
         Contact Us
       </Link>
       <CartContainer />
-    <Theme></Theme>
     </div>
 
 
     {/* Right Side: User/Auth & Hamburger Menu */}
     <div className="flex items-center gap-4">
+          <Theme></Theme>
       {/* Hamburger (Mobile Only) */}
       <div className="md:hidden">
         <button onClick={toggleMenu} className="text-2xl focus:outline-none">

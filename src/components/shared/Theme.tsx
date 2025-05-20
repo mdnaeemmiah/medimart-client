@@ -1,12 +1,12 @@
-"use client"; // for Next.js App Router
+"use client";
 
 import { useEffect, useState } from "react";
+import { Sun, Moon } from "lucide-react"; // Lucide icons
 
 const Theme = () => {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
-    // On mount, check for stored theme or system preference
     const storedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
@@ -29,12 +29,12 @@ const Theme = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-sm">{theme === "dark" ? "Dark" : "Light"} Mode</span>
       <button
         onClick={toggleTheme}
-        className="px-3 py-1 rounded bg-gray-300 dark:bg-gray-700 text-black dark:text-white transition"
+        className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 transition text-black dark:text-white"
+        aria-label="Toggle Theme"
       >
-        Toggle
+        {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
       </button>
     </div>
   );
