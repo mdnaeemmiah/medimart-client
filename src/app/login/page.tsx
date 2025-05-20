@@ -5,7 +5,6 @@ const page = () => {
     return (
         <div>
             <Login></Login>
-            h2
         </div>
     );
 };
