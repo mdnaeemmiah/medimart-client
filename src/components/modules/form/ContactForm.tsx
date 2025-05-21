@@ -123,7 +123,7 @@ export default function ContactForm() {
                     Name
                   </label>
                   <input
-                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C51963] bg-white"
+                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C51963] "
                     type="text"
                     id="name"
                     value={formData.name}
@@ -138,7 +138,7 @@ export default function ContactForm() {
                     Email
                   </label>
                   <input
-                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C51963] bg-white"
+                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C51963] "
                     type="email"
                     id="email"
                     value={formData.email}
@@ -153,7 +153,7 @@ export default function ContactForm() {
                     Subject
                   </label>
                   <input
-                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C51963] bg-white"
+                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C51963] "
                     type="text"
                     id="subject"
                     value={formData.subject}
