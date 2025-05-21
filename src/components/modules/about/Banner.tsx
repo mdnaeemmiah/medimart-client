@@ -3,7 +3,7 @@ import img1 from "../../../app/assets/img1.avif";
 
 const Banner = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center gap-8 p-6 md:p-12 bg-white rounded-lg shadow-md">
+    <div className="flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.5)] md:flex-row items-center gap-8 p-6 md:p-12  rounded-lg ">
       {/* Left Side - Image */}
       <div className="w-full md:w-1/2">
         <Image
