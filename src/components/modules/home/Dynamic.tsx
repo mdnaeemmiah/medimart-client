@@ -41,7 +41,7 @@ const Dynamic = () => {
             height={300}
             className="rounded-lg object-cover transition duration-500"
           />
-          <p className="mt-4 text-lg font-medium text-[#8200DB]">
+          <p className="mt-4 text-lg font-medium ">
             {imageData[index].text}
           </p>
         </div>
@@ -55,7 +55,7 @@ const Dynamic = () => {
             height={300}
             className="rounded-lg object-cover transition duration-500"
           />
-          <p className="mt-4 text-lg font-medium text-[#8200DB]">
+          <p className="mt-4 text-lg font-medium ">
             {imageData[(index + 1) % imageData.length].text}
           </p>
         </div>
