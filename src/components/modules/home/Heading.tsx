@@ -86,6 +86,11 @@ const Heading = () => {
 
   const [upcomingDistricts, setUpcomingDistricts] = useState([
     {
+      zila: 'Brahmanbaria',
+      medical: 'Brahmanbaria Medical Institute',
+      services: 'ENT, Maternity, Pharmacy',
+    },
+    {
       zila: 'Noakhali',
       medical: 'Noakhali Medical Institute',
       services: 'ENT, Maternity, Pharmacy',
