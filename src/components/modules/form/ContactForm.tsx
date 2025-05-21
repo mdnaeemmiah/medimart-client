@@ -1,4 +1,3 @@
-
 // "use client";
 
 // import { useState } from "react";
@@ -193,8 +192,6 @@
 //   );
 // }
 
-
-
 "use client";
 
 import { useState } from "react";
@@ -209,7 +206,9 @@ export default function ContactForm() {
     message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { id, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
@@ -245,10 +244,12 @@ export default function ContactForm() {
           Contact Our Hospital
         </h1>
         <p className="text-xl my-5">
-          Need assistance, have questions about our services, or want to schedule an appointment? Reach out to us!
+          Need assistance, have questions about our services, or want to
+          schedule an appointment? Reach out to us!
         </p>
         <p className="text-xl my-5">
-          Whether you are a patient, a family member, or a healthcare partner, we are here to provide the support you need.
+          Whether you are a patient, a family member, or a healthcare partner,
+          we are here to provide the support you need.
         </p>
       </div>
 
@@ -265,7 +266,9 @@ export default function ContactForm() {
                 Hospital Contact Information
               </h3>
               <p className="mb-4 text-xl">
-                We are here for your health. Whether you need to speak to a doctor, inquire about treatments, or just ask a question—feel free to contact us.
+                We are here for your health. Whether you need to speak to a
+                doctor, inquire about treatments, or just ask a question—feel
+                free to contact us.
               </p>
               <ul className="mb-4">
                 <li className="mb-2">
@@ -291,9 +294,7 @@ export default function ContactForm() {
 
             {/* Right: Contact Form */}
             <div className="w-full md:w-1/2 px-6">
-              <h3 className="text-2xl font-semibold mb-4">
-                Send a Message
-              </h3>
+              <h3 className="text-2xl font-semibold mb-4">Send a Message</h3>
               <form onSubmit={handleSubmit}>
                 {/* Name */}
                 <div className="mb-4">
@@ -306,6 +307,7 @@ export default function ContactForm() {
                     id="name"
                     value={formData.name}
                     onChange={handleChange}
+                    placeholder="Enter your full name"
                     required
                   />
                 </div>
@@ -321,6 +323,7 @@ export default function ContactForm() {
                     id="email"
                     value={formData.email}
                     onChange={handleChange}
+                    placeholder="Enter your email address"
                     required
                   />
                 </div>
@@ -336,6 +339,7 @@ export default function ContactForm() {
                     id="subject"
                     value={formData.subject}
                     onChange={handleChange}
+                    placeholder="Type your message subject"
                     required
                   />
                 </div>
@@ -352,6 +356,7 @@ export default function ContactForm() {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    placeholder="Write your message here..."
                   ></textarea>
                 </div>
 
