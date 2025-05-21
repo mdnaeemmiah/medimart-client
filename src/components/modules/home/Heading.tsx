@@ -31,13 +31,13 @@ const Heading = () => {
     }, []);
 
     return (
-        <div className="w-full bg-gray-100 py-6 text-center">
+        <div className="w-full  py-6 text-center">
             <h2 className="text-3xl font-bold text-purple-700 mb-2">
                 Explore Medical Services by District
             </h2>
             <div className="w-80 h-1 bg-blue-500 mx-auto mb-4"></div>
 
-            <p className="text-lg text-gray-600 mb-6">
+            <p className="text-lg  mb-6">
                 Discover trusted healthcare services from across Bangladesh.  
                 Each district offers specialized treatments, clinics, and hospitals  
                 to ensure quality care. From Dhaka’s advanced facilities to Cox’s Bazar’s  
@@ -49,7 +49,7 @@ const Heading = () => {
                     {[...districts, ...districts].map((district, index) => (
                         <div
                             key={index}
-                            className="w-64 h-52 bg-white shadow-lg rounded-xl p-4 flex flex-col items-center justify-center 
+                            className="w-64 h-52  shadow-lg rounded-xl p-4 flex flex-col items-center justify-center 
                                        transition transform hover:scale-105"
                         >
                             <h1 className="text-xl font-bold text-gray-800">{district.zila}</h1>
