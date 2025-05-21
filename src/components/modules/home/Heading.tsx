@@ -152,7 +152,7 @@ const Heading = () => {
 
       {/* Upcoming Medical Branches */}
       <h3 className="text-xl font-semibold mb-2 text-green-500">Upcoming Medical Branches</h3>
-      <div className="flex flex-wrap justify-center gap-6">
+      <div className="flex  justify-center gap-6">
         {upcomingDistricts.map((district, index) => (
           <div
             key={index}
