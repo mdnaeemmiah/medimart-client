@@ -36,7 +36,7 @@ const Dynamic = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % imageData.length);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
