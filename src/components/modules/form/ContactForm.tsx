@@ -44,15 +44,15 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="min-h-screen bg-slate-50 px-5 w-full mx-auto pt-9">
+    <section className="min-h-screen  px-5 w-full mx-auto pt-9">
       <div className="text-center">
-        <h1 className="text-5xl text-[#3C0040] mt-16 font-bold my-5">
+        <h1 className="text-5xl  mt-16 font-bold my-5">
           Get in Touch with Medicine
         </h1>
-        <p className="text-xl text-[#3C0040] my-5">
+        <p className="text-xl  my-5">
           Have questions about our meal plans or want to collaborate? Reach out!
         </p>
-        <p className="text-xl text-[#3C0040] my-5">
+        <p className="text-xl my-5">
           Whether you are a customer looking for delicious meals or a provider eager to join our platform, we are here to help.
         </p>
       </div>
@@ -66,10 +66,10 @@ export default function ContactForm() {
           <div className="flex flex-wrap -mx-6">
             {/* Left: Contact Info */}
             <div className="w-full md:w-1/2 px-6 mb-6 md:mb-0 flex flex-col justify-center">
-              <h3 className="text-2xl font-semibold mb-4 text-[#3C0040]">
+              <h3 className="text-2xl font-semibold mb-4 ">
                 Get in Touch
               </h3>
-              <p className="mb-4 text-xl text-[#3C0040]">
+              <p className="mb-4 text-xl ">
                 We did love to hear from you! Whether you have a question about our services, need help, or just want to chat, reach out anytime.
               </p>
               <ul className="mb-4">
@@ -92,7 +92,7 @@ export default function ContactForm() {
                   <strong>Hours:</strong> Mon - Fri, 9am - 7pm
                 </li>
               </ul>
-              <div className="flex space-x-4">
+              {/* <div className="flex space-x-4">
                 <a href="#" className="text-gray-600 hover:text-[#3C0040]">
                   <i className="fab fa-facebook-f"></i>
                 </a>
@@ -108,18 +108,18 @@ export default function ContactForm() {
                 <a href="#" className="text-gray-600 hover:text-[#3C0040]">
                   <i className="fab fa-youtube"></i>
                 </a>
-              </div>
+              </div> */}
             </div>
 
             {/* Right: Contact Form */}
             <div className="w-full md:w-1/2 px-6">
-              <h3 className="text-2xl font-semibold mb-4 text-[#3C0040]">
+              <h3 className="text-2xl font-semibold mb-4">
                 Send Us a Message
               </h3>
               <form onSubmit={handleSubmit}>
                 {/* Name */}
                 <div className="mb-4">
-                  <label className="block text-gray-700 mb-2" htmlFor="name">
+                  <label className="block  mb-2" htmlFor="name">
                     Name
                   </label>
                   <input
@@ -134,7 +134,7 @@ export default function ContactForm() {
 
                 {/* Email */}
                 <div className="mb-4">
-                  <label className="block text-gray-700 mb-2" htmlFor="email">
+                  <label className="block  mb-2" htmlFor="email">
                     Email
                   </label>
                   <input
@@ -149,7 +149,7 @@ export default function ContactForm() {
 
                 {/* Subject */}
                 <div className="mb-4">
-                  <label className="block text-gray-700 mb-2" htmlFor="subject">
+                  <label className="block  mb-2" htmlFor="subject">
                     Subject
                   </label>
                   <input
@@ -164,7 +164,7 @@ export default function ContactForm() {
 
                 {/* Message */}
                 <div className="mb-4">
-                  <label className="block text-gray-700 mb-2" htmlFor="message">
+                  <label className="block mb-2" htmlFor="message">
                     Message
                   </label>
                   <textarea
@@ -180,7 +180,7 @@ export default function ContactForm() {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="bg-green-500 mb-4 text-white py-2 px-4 rounded-md font-semibold hover:bg-[#C51963] hover:scale-105 transform transition duration-300"
+                  className="bg-violet-600 mb-8 text-white py-2 px-4 rounded-md font-semibold hover:bg-[#C51963] hover:scale-105 transform transition duration-300"
                 >
                   Send Message
                 </button>
