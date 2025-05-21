@@ -44,7 +44,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="min-h-screen bg-slate-50 px-5 max-w-6xl mx-auto pt-9">
+    <section className="min-h-screen bg-slate-50 px-5 w-full mx-auto pt-9">
       <div className="text-center">
         <h1 className="text-5xl text-[#3C0040] mt-16 font-bold my-5">
           Get in Touch with Medicine
