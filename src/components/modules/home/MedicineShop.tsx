@@ -30,7 +30,6 @@ const MedicineShop = () => {
 
   const dispatch = useAppDispatch();
 
-
   useEffect(() => {
     const fetchProviders = async () => {
       try {
@@ -44,7 +43,6 @@ const MedicineShop = () => {
     };
     fetchProviders();
   }, []);
-
 
 
   const handleAddToCart = (medicine: MedicineType) => {
@@ -62,14 +60,14 @@ const MedicineShop = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-lg rounded-2xl border border-gray-200 text-center">
+    <div className="p-4  shadow-lg rounded-2xl border border-gray-200 text-center">
       <h2 className="text-xl font-semibold text-gray-800 mb-4">Available Medicines</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
         {medicines.map((medicine) => (
           <div
             key={medicine._id}
-            className="p-4 bg-gray-100 rounded-lg shadow-md transition-transform duration-300 hover:scale-100"
+            className="p-4  rounded-lg shadow-md transition-transform duration-300 hover:scale-100"
           >
             <p className="text-gray-600"><strong>ID:</strong> {medicine.id}</p>
             <p className="text-gray-600"><strong>Name:</strong> {medicine.name}</p>
