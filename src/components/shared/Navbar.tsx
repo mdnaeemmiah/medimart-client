@@ -33,7 +33,7 @@ import {
 import { useCreateOrderMutation } from "@/redux/features/order/orderSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout } from "@/redux/features/auth/authSlice";
-import img1 from "../../app/assets/img1.png";
+import img1 from "../../app/assets/logo-removebg-preview.png";
 import { usePathname, useRouter } from "next/navigation";
 import Theme from "./Theme";
 
