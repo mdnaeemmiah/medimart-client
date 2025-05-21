@@ -248,7 +248,7 @@ export default function ContactForm() {
           Need assistance, have questions about our services, or want to schedule an appointment? Reach out to us!
         </p>
         <p className="text-xl my-5">
-          Whether you are a patient, a family member, or a healthcare partner, we're here to provide the support you need.
+          Whether you are a patient, a family member, or a healthcare partner, we are here to provide the support you need.
         </p>
       </div>
 
@@ -278,7 +278,7 @@ export default function ContactForm() {
                   <strong>Email:</strong>{" "}
                   <a
                     href="mailto:contact@medicarehospital.com"
-                    className="text-[#EF1F76] font-semibold hover:underline"
+                    className="text-violet-600 font-semibold hover:underline"
                   >
                     contact@medicarehospital.com
                   </a>
@@ -301,7 +301,7 @@ export default function ContactForm() {
                     Name
                   </label>
                   <input
-                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C51963]"
+                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a65deb]"
                     type="text"
                     id="name"
                     value={formData.name}
@@ -316,7 +316,7 @@ export default function ContactForm() {
                     Email
                   </label>
                   <input
-                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C51963]"
+                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a65deb]"
                     type="email"
                     id="email"
                     value={formData.email}
@@ -331,7 +331,7 @@ export default function ContactForm() {
                     Subject
                   </label>
                   <input
-                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C51963]"
+                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a65deb]"
                     type="text"
                     id="subject"
                     value={formData.subject}
@@ -346,7 +346,7 @@ export default function ContactForm() {
                     Message
                   </label>
                   <textarea
-                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C51963]"
+                    className="w-full px-4 py-2 border-[1.5px] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a65deb]"
                     id="message"
                     rows={4}
                     value={formData.message}
