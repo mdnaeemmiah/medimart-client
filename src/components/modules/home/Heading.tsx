@@ -114,14 +114,13 @@ const Heading = () => {
       <h2 className="text-3xl font-bold text-purple-700 mb-2">
         Explore Medical Services by District
       </h2>
-      <div className="w-80 h-1 bg-blue-500 mx-auto mb-4"></div>
-
+  
       <p className="text-lg mb-4 px-4">
         Discover trusted healthcare services from across Bangladesh. Each district offers
         specialized treatments, clinics, and hospitals to ensure quality care.
       </p>
 
-      <p className="text-sm text-gray-600 mb-6">
+      <p className="text-sm  mb-6">
         Current Date & Time:{' '}
         <span className="font-semibold text-blue-600">
           {time.toLocaleDateString()} {time.toLocaleTimeString()}
@@ -129,7 +128,7 @@ const Heading = () => {
       </p>
 
       {/* Medical Branches */}
-      <h3 className="text-xl font-semibold mb-2 text-green-600">Medical Branches</h3>
+      <h3 className="text-xl font-semibold mb-2 text-orange-500">Medical Branches</h3>
       <div className="overflow-hidden w-full mb-10">
         <div className="flex gap-6 animate-marquee whitespace-nowrap">
           {[...districts, ...districts].map((district, index) => (
