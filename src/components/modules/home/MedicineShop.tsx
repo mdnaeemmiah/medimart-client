@@ -67,18 +67,18 @@ const MedicineShop = () => {
         {medicines.map((medicine) => (
           <div
             key={medicine._id}
-            className="p-4  rounded-lg shadow-lg transition-transform duration-300 hover:scale-100"
+            className="p-4  rounded-lg  shadow-[0_4px_20px_rgba(0,0,0,0.5)]  transition-transform duration-300 hover:scale-100"
           >
-            <p className="text-gray-600"><strong>ID:</strong> {medicine.id}</p>
-            <p className="text-gray-600"><strong>Name:</strong> {medicine.name}</p>
-            <p className="text-gray-600"><strong>Description:</strong> {medicine.description}</p>
-            <p className="text-gray-600"><strong>Price:</strong> ${medicine.price}</p>
-            <p className="text-gray-600"><strong>Stock:</strong> {medicine.stock}</p>
-            <p className="text-gray-600"><strong>Requires Prescription:</strong> {medicine.requiresPrescription ? "Yes" : "No"}</p>
-            <p className="text-gray-600"><strong>Expiry Date:</strong> {medicine.expiryDate}</p>
-            <p className="text-gray-600"><strong>Manufacturer:</strong> {medicine.manufacturer.name}</p>
-            <p className="text-gray-600"><strong>Address:</strong> {medicine.manufacturer.address}</p>
-            <p className="text-gray-600"><strong>Contact:</strong> {medicine.manufacturer.contact}</p>
+            <p ><strong>ID:</strong> {medicine.id}</p>
+            <p ><strong>Name:</strong> {medicine.name}</p>
+            <p ><strong>Description:</strong> {medicine.description}</p>
+            <p ><strong>Price:</strong> ${medicine.price}</p>
+            <p ><strong>Stock:</strong> {medicine.stock}</p>
+            <p ><strong>Requires Prescription:</strong> {medicine.requiresPrescription ? "Yes" : "No"}</p>
+            <p ><strong>Expiry Date:</strong> {medicine.expiryDate}</p>
+            <p ><strong>Manufacturer:</strong> {medicine.manufacturer.name}</p>
+            <p ><strong>Address:</strong> {medicine.manufacturer.address}</p>
+            <p ><strong>Contact:</strong> {medicine.manufacturer.contact}</p>
 
             <Link href={`/medicine/${medicine._id}`}>
               <p className="text-green-500 font-bold underline pt-3 text-center">View Details</p>
