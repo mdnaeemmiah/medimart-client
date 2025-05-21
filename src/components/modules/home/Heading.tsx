@@ -134,10 +134,10 @@ const Heading = () => {
           {[...districts, ...districts].map((district, index) => (
             <div
               key={index}
-              className="w-64 h-60 bg-white shadow-lg rounded-xl p-4 flex flex-col items-center justify-center 
+              className="w-64 h-60 shadow-[0_4px_20px_rgba(0,0,0,0.5)] rounded-xl p-4 flex flex-col items-center justify-center 
                          transition transform hover:scale-105"
             >
-              <h1 className="text-lg font-bold text-gray-800">{district.zila}</h1>
+              <h1 className="text-lg font-bold ">{district.zila}</h1>
               <p className="text-sm text-purple-700 mt-1 font-semibold text-center">{district.medical}</p>
               <p className="text-sm text-gray-600 mt-2 text-center">{district.services}</p>
             </div>
@@ -146,15 +146,15 @@ const Heading = () => {
       </div>
 
       {/* Upcoming Medical Branches */}
-      <h3 className="text-xl font-semibold mb-2 text-orange-500">Upcoming Medical Branches</h3>
+      <h3 className="text-xl font-semibold mb-2 text-green-500">Upcoming Medical Branches</h3>
       <div className="flex flex-wrap justify-center gap-6">
         {upcomingDistricts.map((district, index) => (
           <div
             key={index}
-            className="w-64 h-60 bg-gray-50 shadow-md rounded-xl p-4 flex flex-col items-center justify-center 
+            className="w-64 h-60  shadow-[0_4px_20px_rgba(0,0,0,0.5)] rounded-xl p-4 flex flex-col items-center justify-center 
                        transition transform hover:scale-105"
           >
-            <h1 className="text-lg font-bold text-gray-800">{district.zila}</h1>
+            <h1 className="text-lg font-bold ">{district.zila}</h1>
             <p className="text-sm text-purple-700 mt-1 font-semibold text-center">{district.medical}</p>
             <p className="text-sm text-gray-600 mt-2 text-center">{district.services}</p>
             <span className="text-xs mt-2 text-red-500 font-medium">Coming Soon</span>
