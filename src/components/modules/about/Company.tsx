@@ -107,11 +107,11 @@ const Company = () => {
               alt={provider.name}
               className="w-40 h-40 mx-auto rounded-full shadow-md border-4 border-purple-500"
             />
-            <h3 className="text-2xl font-semibold text-gray-800 mt-4">
+            <h3 className="text-2xl font-semibold  mt-4">
               {provider.name}
             </h3>
-            <p className="text-sm text-gray-500">{provider.experience}</p>
-            <p className="text-gray-700 mt-2">{provider.description}</p>
+            <p className="text-sm text-gray-200">{provider.experience}</p>
+            <p className="text-gray-300 mt-2">{provider.description}</p>
           </div>
         ))}
       </Carousel>
