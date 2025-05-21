@@ -312,7 +312,7 @@ export default function Navbar() {
 
   const dashboardRoute =
     userRole === "admin"
-      ? "/dashboard/admin"
+      ? "/dashboard/admin/adminDashboard"
       : userRole === "customer"
       ? "/dashboard/customer/customerDashboard"
       : "/dashboard";
