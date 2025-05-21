@@ -34,7 +34,7 @@ import { useCreateOrderMutation } from "@/redux/features/order/orderSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout } from "@/redux/features/auth/authSlice";
 import img1 from "../../app/assets/img1.png";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Theme from "./Theme";
 
 const { useBreakpoint } = Grid;
@@ -308,10 +308,11 @@ export default function Navbar() {
   const userRole =
     useAppSelector((state) => state?.auth?.user?.role) || "customer";
   const router = useRouter();
+   const pathname = usePathname();
 
   const dashboardRoute =
     userRole === "admin"
-      ? "/dashboard/admin/naeem"
+      ? "/dashboard/admin"
       : userRole === "customer"
       ? "/dashboard/customer/customerDashboard"
       : "/dashboard";
@@ -321,12 +322,22 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logout()); 
     toast.success("Successfully logged out!");
     setTimeout(() => {
       router.push("/login");
     }, 1500);
   };
+
+
+  const links = [
+    { href: '/', label: 'Home' },
+    { href: '/medicine', label: 'Shop' },
+    { href: '/doctor', label: 'Doctors' },
+    { href: '/about', label: 'About Us' },
+    { href: '/contact', label: 'Contact Us' },
+  ];
+
 
 return (
 <div className="flex items-center justify-between px-6 py-4  shadow-md relative">
@@ -339,22 +350,18 @@ return (
     </div>
 
     {/* Center: Navigation Links (hidden on small screens) */}
-    <div className="hidden md:flex space-x-6 items-center">
-      <Link href="/" className="hover:text-blue-600">
-        Home
-      </Link>
-      <Link href="/medicine" className="hover:text-blue-600">
-        Shop
-      </Link>
-      <Link href="/doctor" className="hover:text-blue-600">
-        Doctors
-      </Link>
-      <Link href="/about" className="hover:text-blue-600">
-        About Us
-      </Link>
-      <Link href="/contact" className="hover:text-blue-600">
-        Contact Us
-      </Link>
+  <div className="hidden md:flex space-x-6 items-center">
+      {links.map(({ href, label }) => (
+        <Link
+          key={href}
+          href={href}
+          className={`hover:text-blue-600 ${
+            pathname === href ? 'text-blue-600 font-bold' : ''
+          }`}
+        >
+          {label}
+        </Link>
+      ))}
       <CartContainer />
     </div>
 
@@ -410,8 +417,8 @@ return (
           <Link href="/medicine" className="hover:text-blue-600">
             Shop
           </Link>
-          <Link href="/customerPost" className="hover:text-blue-600">
-            Meal-Preference
+          <Link href="/doctor" className="hover:text-blue-600">
+            Doctor
           </Link>
           <Link href="/about" className="hover:text-blue-600">
             About Us
