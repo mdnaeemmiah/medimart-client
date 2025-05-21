@@ -1,5 +1,5 @@
 import Link from "next/link";
-import img1 from "../../../app/assets/img11.jpeg";
+import img1 from "../../../app/assets/photo-1576086213369-97a306d36557.avif";
 
 const Info = () => {
     return (
