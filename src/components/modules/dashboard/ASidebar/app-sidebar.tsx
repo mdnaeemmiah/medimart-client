@@ -36,10 +36,24 @@ const data = {
       isActive: true,
     },
     {
-      title: "CreateMeal",
-      url: "PostMeal",
+      title: "Doctors",
+      url: "doctor",
       icon: SquareTerminal,
       isActive: true,
+            items: [
+        {
+          title: "All",
+          url: "/post/all",
+        },
+        {
+          title: "Add",
+          url: "/post/add",
+        },
+        {
+          title: "Trash",
+          url: "/post/trash",
+        },
+      ],
     },
     {
       title: "All-Meals",
