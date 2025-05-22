@@ -26,7 +26,10 @@ const DoctorsAllPage = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-semibold mb-4">All Doctors</h2>
+       <div className="flex items-center justify-between mb-4">
+         <h2 className="text-2xl font-semibold mb-4">All Doctors</h2>
+         <h2>Add Doctor</h2>
+       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full border border-gray-200 text-left text-sm">
           <thead className="bg-gray-100 text-gray-700">
