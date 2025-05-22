@@ -131,9 +131,9 @@ export function AAppSidebar({
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
+            <SidebarMenuButton size="lg" asChild className="flex items-center justify-center bg-gray-300">
               <Link href="/">
-                <div className="flex items-center justify-center">
+                <div>
                   <Image height={40} width={40} src={img1} alt="image" />
                 </div>
               </Link>
