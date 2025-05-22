@@ -4,12 +4,22 @@
 import React from 'react';
 import Image from 'next/image';
 import { useGetDoctorsQuery } from '@/redux/features/doctor/doctorSlice';
-
+import { Trash2, Pencil } from 'lucide-react';
 
 const DoctorsAllPage = () => {
   const { data, isLoading, isError } = useGetDoctorsQuery(undefined);
 
-  const doctors = data?.data || []; // Adjust according to actual API shape
+  const doctors = data?.data || [];
+
+  const handleDelete = (id: string) => {
+    console.log('Delete doctor with id:', id);
+    // TODO: Call delete mutation here
+  };
+
+  const handleEdit = (id: string) => {
+    console.log('Edit doctor with id:', id);
+    // TODO: Redirect to update page, e.g. `/dashboard/admin/doctor/edit/${id}`
+  };
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error fetching doctors.</p>;
@@ -28,6 +38,7 @@ const DoctorsAllPage = () => {
               <th className="p-3 border">Date</th>
               <th className="p-3 border">Time</th>
               <th className="p-3 border">Day</th>
+              <th className="p-3 border text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -52,6 +63,18 @@ const DoctorsAllPage = () => {
                 <td className="p-3 border">{doctor.date || 'N/A'}</td>
                 <td className="p-3 border">{doctor.time || 'N/A'}</td>
                 <td className="p-3 border">{doctor.day || 'N/A'}</td>
+                <td className="p-3 border text-center">
+                  <div className="flex items-center justify-center gap-3">
+                    <Pencil
+                      className="w-4 h-4 text-blue-600 cursor-pointer"
+                      onClick={() => handleEdit(doctor._id)}
+                    />
+                    <Trash2
+                      className="w-4 h-4 text-red-600 cursor-pointer"
+                      onClick={() => handleDelete(doctor._id)}
+                    />
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
