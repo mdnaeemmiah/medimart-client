@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // /* eslint-disable @typescript-eslint/no-explicit-any */
 // "use client";
 
@@ -98,12 +99,10 @@
 
 
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import {
   useGetDoctorsQuery,
   useDeleteDoctorMutation,
@@ -111,32 +110,39 @@ import {
 import { Trash2, Pencil } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
+import DoctorModel from "@/components/modules/form/DoctorModel";
 
 const DoctorsAllPage = () => {
   const { data, isLoading, isError } = useGetDoctorsQuery(undefined);
   const [deleteDoctor] = useDeleteDoctorMutation();
-  const router = useRouter();
 
   const doctors = data?.data || [];
 
-  // ✅ DELETE HANDLER
+  // ✅ For modal state
+  const [editingDoctor, setEditingDoctor] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this doctor?")) {
       try {
-        const res = await deleteDoctor(id).unwrap();
+        await deleteDoctor(id).unwrap();
         toast.success("Doctor deleted successfully");
-      } catch (error) {
+      } catch {
         toast.error("Failed to delete doctor");
       }
     }
   };
 
-  // ✅ EDIT HANDLER (Navigate to doctor form with ID)
-  const handleEdit = (id: string) => {
-    router.push(`/dashboard/admin/doctors/edit/${id}`);
+  const handleEdit = (doctor: any) => {
+    setEditingDoctor(doctor);
+    setIsModalOpen(true);
   };
 
-  
+  const closeModal = () => {
+    setEditingDoctor(null);
+    setIsModalOpen(false);
+  };
+
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error fetching doctors.</p>;
 
@@ -167,7 +173,7 @@ const DoctorsAllPage = () => {
           </thead>
           <tbody>
             {doctors.map((doctor: any, index: number) => (
-              <tr key={doctor._id || index} className="border-t hover:bg-gray-50">
+              <tr key={doctor._id} className="border-t hover:bg-gray-600">
                 <td className="p-3 border">{index + 1}</td>
                 <td className="p-3 border">
                   {doctor.image ? (
@@ -182,16 +188,16 @@ const DoctorsAllPage = () => {
                     "N/A"
                   )}
                 </td>
-                <td className="p-3 border">{doctor.name || "N/A"}</td>
-                <td className="p-3 border">{doctor.hospital || "N/A"}</td>
-                <td className="p-3 border">{doctor.date || "N/A"}</td>
-                <td className="p-3 border">{doctor.time || "N/A"}</td>
-                <td className="p-3 border">{doctor.day || "N/A"}</td>
+                <td className="p-3 border">{doctor.name}</td>
+                <td className="p-3 border">{doctor.hospital}</td>
+                <td className="p-3 border">{doctor.date}</td>
+                <td className="p-3 border">{doctor.time}</td>
+                <td className="p-3 border">{doctor.day}</td>
                 <td className="p-3 border text-center">
                   <div className="flex items-center justify-center gap-5">
                     <Pencil
                       className="w-4 h-4 text-blue-600 cursor-pointer"
-                      onClick={() => handleEdit(doctor._id)}
+                      onClick={() => handleEdit(doctor)}
                     />
                     <Trash2
                       className="w-4 h-4 text-red-600 cursor-pointer"
@@ -204,6 +210,15 @@ const DoctorsAllPage = () => {
           </tbody>
         </table>
       </div>
+
+      {/* ✅ DoctorModel modal */}
+      {isModalOpen && (
+        <DoctorModel
+          visible={isModalOpen}
+          doctor={editingDoctor}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };
