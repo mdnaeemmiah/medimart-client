@@ -63,8 +63,8 @@ const DoctorsAllPage = () => {
                 <td className="p-3 border">{doctor.date || 'N/A'}</td>
                 <td className="p-3 border">{doctor.time || 'N/A'}</td>
                 <td className="p-3 border">{doctor.day || 'N/A'}</td>
-                <td className="p-3 border text-center">
-                  <div className="flex items-center justify-center gap-3">
+                <td className="p-3 border   justify-between">
+                  <div className="flex items-center justify-center gap-5">
                     <Pencil
                       className="w-4 h-4 text-blue-600 cursor-pointer"
                       onClick={() => handleEdit(doctor._id)}
