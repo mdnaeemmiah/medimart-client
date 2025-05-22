@@ -30,7 +30,7 @@ const CustomerGraph = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
       {/* Orders Over Time */}
-      <div className="bg-white p-4 shadow rounded-xl">
+      <div className=" p-4 shadow rounded-xl">
         <h2 className="text-lg font-semibold mb-2">Customer Orders Over Time</h2>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={orderData}>

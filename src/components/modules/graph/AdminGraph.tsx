@@ -13,7 +13,7 @@ const data = [
 
 const AdminGraph = () => {
   return (
-    <div className="p-4 bg-white shadow-md rounded-xl">
+    <div className="p-4 bg-black shadow-md rounded-xl">
       <h2 className="text-xl font-semibold mb-4">Provider Meal Statistics</h2>
       <ResponsiveContainer width="100%" height={450}>
         <BarChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
