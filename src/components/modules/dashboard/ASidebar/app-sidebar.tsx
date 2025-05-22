@@ -37,21 +37,21 @@ const data = {
     },
     {
       title: "Doctors",
-      url: "doctor",
+      url: "doctors",
       icon: SquareTerminal,
       isActive: true,
             items: [
         {
           title: "All",
-          url: "/post/all",
+          url: "/dashboard/admin/doctors/all",
         },
         {
           title: "Add",
-          url: "/post/add",
+          url: "/dashboard/admin/doctors/add",
         },
         {
           title: "Trash",
-          url: "/post/trash",
+          url: "/dashboard/admin/doctors/trash",
         },
       ],
     },
