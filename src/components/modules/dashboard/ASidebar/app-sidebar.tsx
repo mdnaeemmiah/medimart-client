@@ -24,8 +24,8 @@ import {
 import Link from "next/link";
 import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
-// import Logo from "@/app/assets/svgs/Logo";
-
+import Image from "next/image";
+import img1 from "../../../../app/assets/logo-removebg-preview.png";
 
 const data = {
   navMain: [
@@ -40,7 +40,7 @@ const data = {
       url: "/dashboard/admin/doctors",
       icon: SquareTerminal,
       isActive: true,
-            items: [
+      items: [
         {
           title: "All",
           url: "/dashboard/admin/doctors/all",
@@ -123,7 +123,9 @@ const data = {
   ],
 };
 
-export function AAppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AAppSidebar({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -132,10 +134,7 @@ export function AAppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) 
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
                 <div className="flex items-center justify-center">
-                  {/* <Logo /> */}
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <h2 className="font-bold text-xl">Hospital</h2>
+                  <Image height={40} width={40} src={img1} alt="image" />
                 </div>
               </Link>
             </SidebarMenuButton>
