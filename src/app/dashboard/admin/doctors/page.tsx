@@ -5,6 +5,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useGetDoctorsQuery } from '@/redux/features/doctor/doctorSlice';
 import { Trash2, Pencil } from 'lucide-react';
+import Link from 'next/link';
 
 const DoctorsAllPage = () => {
   const { data, isLoading, isError } = useGetDoctorsQuery(undefined);
@@ -28,7 +29,7 @@ const DoctorsAllPage = () => {
     <div className="p-4">
        <div className="flex items-center justify-between mb-4">
          <h2 className="text-2xl font-semibold mb-4">All Doctors</h2>
-         <h2>Add Doctor</h2>
+        <Link href='/dashboard/admin/doctors/add'> <h2>Add Doctor</h2></Link>
        </div>
       <div className="overflow-x-auto">
         <table className="min-w-full border border-gray-200 text-left text-sm">

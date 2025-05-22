@@ -31,13 +31,13 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "providerDashboard",
+      url: "adminDashboard",
       icon: SquareTerminal,
       isActive: true,
     },
     {
       title: "Doctors",
-      url: "doctors",
+      url: "/dashboard/admin/doctors",
       icon: SquareTerminal,
       isActive: true,
             items: [
@@ -135,7 +135,7 @@ export function AAppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) 
                   {/* <Logo /> */}
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <h2 className="font-bold text-xl">Meal-Box</h2>
+                  <h2 className="font-bold text-xl">Hospital</h2>
                 </div>
               </Link>
             </SidebarMenuButton>
