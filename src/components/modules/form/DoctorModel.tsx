@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import React, { useState } from "react";
@@ -22,6 +20,7 @@ const DoctorModel: React.FC<DoctorModelProps> = ({
 }) => {
   const [updateDoctor] = useUpdateDoctorMutation();
   const [previewImage, setPreviewImage] = useState<string>(doctor?.image || "");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   if (!visible || !doctor) return null;
 
@@ -48,19 +47,30 @@ const DoctorModel: React.FC<DoctorModelProps> = ({
   ) => {
     const file = e.target.files?.[0];
     if (file) {
+      setSelectedFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        const base64 = reader.result as string;
-        setFieldValue("image", base64);
-        setPreviewImage(base64);
+        setPreviewImage(reader.result as string);
       };
       reader.readAsDataURL(file);
+      setFieldValue("image", file); // store File object instead of base64
     }
   };
 
   const handleSubmit = async (values: typeof initialValues) => {
     try {
-      await updateDoctor({ id: doctor._id, body: values }).unwrap();
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("hospital", values.hospital);
+      formData.append("date", values.date);
+      formData.append("time", values.time);
+      formData.append("day", values.day);
+
+      if (selectedFile) {
+        formData.append("image", selectedFile);
+      }
+
+      await updateDoctor({ id: doctor._id, body: formData }).unwrap();
       toast.success("Doctor updated successfully");
       onClose();
     } catch (error) {
@@ -86,7 +96,6 @@ const DoctorModel: React.FC<DoctorModelProps> = ({
         >
           {({ setFieldValue }) => (
             <Form className="space-y-4">
-              {/* All text fields */}
               {["name", "hospital", "date", "time", "day"].map((field) => (
                 <div key={field}>
                   <label className="block text-sm font-medium capitalize">
@@ -105,7 +114,6 @@ const DoctorModel: React.FC<DoctorModelProps> = ({
                 </div>
               ))}
 
-              {/* Image upload */}
               <div>
                 <label className="block text-sm font-medium">Image</label>
                 {previewImage && (

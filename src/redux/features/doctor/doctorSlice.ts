@@ -1,5 +1,15 @@
 import { baseApi } from "../../api/baseApi";
 
+interface Doctor {
+  _id: string;
+  name: string;
+  hospital: string;
+  date: string;
+  time: string;
+  day: string;
+  image?: string;
+}
+
 const doctorApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createDoctor: builder.mutation({
@@ -24,13 +34,16 @@ const doctorApi = baseApi.injectEndpoints({
       }),
       providesTags: (result, error, id) => [{ type: "Doctor", id }],
     }),
-    updateDoctor: builder.mutation({
-      query: ({ id, ...patch }) => ({
+    updateDoctor: builder.mutation<
+      Doctor,
+      { id: string; body: FormData }
+    >({
+      query: ({ id, body }) => ({
         url: `/doctor/${id}`,
         method: "PATCH",
-        body: patch,
+        body, // formData
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "Doctor", id }],
+      invalidatesTags:[ "Doctor"],
     }),
     deleteDoctor: builder.mutation({
       query: (id) => ({

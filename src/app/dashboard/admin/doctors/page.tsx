@@ -1,104 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// /* eslint-disable @typescript-eslint/no-explicit-any */
-// "use client";
-
-// import React from "react";
-// import Image from "next/image";
-// import { useGetDoctorsQuery,useDeleteDoctorMutation } from "@/redux/features/doctor/doctorSlice";
-// import { Trash2, Pencil } from "lucide-react";
-// import Link from "next/link";
-// import DoctorModel from "@/components/modules/form/DoctorModel";
-
-// const DoctorsAllPage = () => {
-//   const { data, isLoading, isError } = useGetDoctorsQuery(undefined);
-
-//   const doctors = data?.data || [];
-
-//   const handleDelete = (id: string) => {
-//     console.log("Delete doctor with id:", id);
-//     // TODO: Call delete mutation here
-//   };
-
-//   const handleEdit = (id: string) => {
-//     console.log("Edit doctor with id:", id);
-//     // TODO: Redirect to update page, e.g. `/dashboard/admin/doctor/edit/${id}`
-//   };
-
-//   if (isLoading) return <p>Loading...</p>;
-//   if (isError) return <p>Error fetching doctors.</p>;
-
-//   return (
-//     <div className="p-4">
-//       <div className="flex items-center justify-between mb-4">
-//         <h2 className="text-2xl font-semibold mb-4">All Doctors</h2>
-//         <Link href="/dashboard/admin/doctors/add">
-//           <button className="border-2 p-2 cursor-pointer">Add Doctor</button>
-//         </Link>
-//       </div>
-//       <div className="overflow-x-auto">
-//         <table className="min-w-full border border-gray-200 text-left text-sm">
-//           <thead className="bg-gray-100 text-gray-700">
-//             <tr>
-//               <th className="p-3 border">#</th>
-//               <th className="p-3 border">Image</th>
-//               <th className="p-3 border">Name</th>
-//               <th className="p-3 border">Hospital</th>
-//               <th className="p-3 border">Date</th>
-//               <th className="p-3 border">Time</th>
-//               <th className="p-3 border">Day</th>
-//               <th className="p-3 border text-center">Action</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {doctors.map((doctor: any, index: number) => (
-//               <tr
-//                 key={doctor._id || index}
-//                 className="border-t hover:bg-gray-50"
-//               >
-//                 <td className="p-3 border">{index + 1}</td>
-//                 <td className="p-3 border">
-//                   {doctor.image ? (
-//                     <Image
-//                       src={doctor.image}
-//                       alt={doctor.name}
-//                       width={40}
-//                       height={40}
-//                       className="rounded-full"
-//                     />
-//                   ) : (
-//                     "N/A"
-//                   )}
-//                 </td>
-//                 <td className="p-3 border">{doctor.name || "N/A"}</td>
-//                 <td className="p-3 border">{doctor.hospital || "N/A"}</td>
-//                 <td className="p-3 border">{doctor.date || "N/A"}</td>
-//                 <td className="p-3 border">{doctor.time || "N/A"}</td>
-//                 <td className="p-3 border">{doctor.day || "N/A"}</td>
-//                 <td className="p-3 border   justify-between">
-//                   <div className="flex items-center justify-center gap-5">
-//                     <Pencil
-//                       className="w-4 h-4 text-blue-600 cursor-pointer"
-//                       onClick={() => handleEdit(doctor._id)}
-//                     />
-//                     <Trash2
-//                       className="w-4 h-4 text-red-600 cursor-pointer"
-//                       onClick={() => handleDelete(doctor._id)}
-//                     />
-//                   </div>
-//                 </td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DoctorsAllPage;
-
-
-
 "use client";
 
 import React, { useState } from "react";
@@ -113,12 +13,11 @@ import { toast } from "sonner";
 import DoctorModel from "@/components/modules/form/DoctorModel";
 
 const DoctorsAllPage = () => {
-  const { data, isLoading, isError } = useGetDoctorsQuery(undefined);
+  const { data, isLoading, isError, refetch } = useGetDoctorsQuery(undefined);
   const [deleteDoctor] = useDeleteDoctorMutation();
 
   const doctors = data?.data || [];
 
-  // ✅ For modal state
   const [editingDoctor, setEditingDoctor] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -141,6 +40,7 @@ const DoctorsAllPage = () => {
   const closeModal = () => {
     setEditingDoctor(null);
     setIsModalOpen(false);
+    refetch(); // refetch doctors list to update UI after modal close
   };
 
   if (isLoading) return <p>Loading...</p>;
@@ -168,24 +68,24 @@ const DoctorsAllPage = () => {
               <th className="p-3 border">Date</th>
               <th className="p-3 border">Time</th>
               <th className="p-3 border">Day</th>
-              <th className="p-3 border text-center">Action</th>
+              <th className="p-3 border">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {doctors.map((doctor: any, index: number) => (
-              <tr key={doctor._id} className="border-t hover:bg-gray-600">
-                <td className="p-3 border">{index + 1}</td>
-                <td className="p-3 border">
+            {doctors.map((doctor:any, i:any) => (
+              <tr key={doctor._id} className="border-t">
+                <td className="p-3 border">{i + 1}</td>
+                <td className="p-3 border w-20">
                   {doctor.image ? (
                     <Image
                       src={doctor.image}
                       alt={doctor.name}
-                      width={40}
-                      height={40}
+                      width={50}
+                      height={50}
                       className="rounded-full object-cover"
                     />
                   ) : (
-                    "N/A"
+                    <div className="w-12 h-12 bg-gray-300 rounded-full" />
                   )}
                 </td>
                 <td className="p-3 border">{doctor.name}</td>
@@ -193,17 +93,19 @@ const DoctorsAllPage = () => {
                 <td className="p-3 border">{doctor.date}</td>
                 <td className="p-3 border">{doctor.time}</td>
                 <td className="p-3 border">{doctor.day}</td>
-                <td className="p-3 border text-center">
-                  <div className="flex items-center justify-center gap-5">
-                    <Pencil
-                      className="w-4 h-4 text-blue-600 cursor-pointer"
-                      onClick={() => handleEdit(doctor)}
-                    />
-                    <Trash2
-                      className="w-4 h-4 text-red-600 cursor-pointer"
-                      onClick={() => handleDelete(doctor._id)}
-                    />
-                  </div>
+                <td className="p-3 border space-x-2">
+                  <button
+                    className="text-blue-600 hover:text-blue-800"
+                    onClick={() => handleEdit(doctor)}
+                  >
+                    <Pencil size={18} />
+                  </button>
+                  <button
+                    className="text-red-600 hover:text-red-800"
+                    onClick={() => handleDelete(doctor._id)}
+                  >
+                    <Trash2 size={18} />
+                  </button>
                 </td>
               </tr>
             ))}
@@ -211,8 +113,8 @@ const DoctorsAllPage = () => {
         </table>
       </div>
 
-      {/* ✅ DoctorModel modal */}
-      {isModalOpen && (
+      {/* Edit Doctor Modal */}
+      {editingDoctor && (
         <DoctorModel
           visible={isModalOpen}
           doctor={editingDoctor}
