@@ -6,11 +6,116 @@ import Image from "next/image";
 import {
   useGetDoctorsQuery,
   useDeleteDoctorMutation,
+  useUpdateDoctorMutation
 } from "@/redux/features/doctor/doctorSlice";
 import { Trash2, Pencil } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
-import DoctorModel from "@/components/modules/form/DoctorModel";
+
+// Modal Component for Editing
+const EditDoctorModal = ({
+  doctor,
+  onClose,
+}: {
+  doctor: any;
+  onClose: () => void;
+}) => {
+  const [updateDoctor, { isLoading: updating }] = useUpdateDoctorMutation();
+
+  const [formData, setFormData] = useState({
+    name: doctor.name || "",
+    hospital: doctor.hospital || "",
+    date: doctor.date || "",
+    time: doctor.time || "",
+    day: doctor.day || "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await updateDoctor({ id: doctor._id, body: formData }).unwrap();
+      toast.success("Doctor updated successfully");
+      onClose();
+    } catch (error) {
+      toast.error("Failed to update doctor");
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">
+      <div className=" rounded p-6 w-full max-w-md shadow-lg">
+        <h2 className="text-lg font-semibold mb-4">Edit Doctor</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Doctor Name"
+            className="w-full border px-3 py-2 rounded"
+            required
+          />
+          <input
+            type="text"
+            name="hospital"
+            value={formData.hospital}
+            onChange={handleChange}
+            placeholder="Hospital"
+            className="w-full border px-3 py-2 rounded"
+            required
+          />
+          <input
+            type="text"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            placeholder="Date"
+            className="w-full border px-3 py-2 rounded"
+            required
+          />
+          <input
+            type="text"
+            name="time"
+            value={formData.time}
+            onChange={handleChange}
+            placeholder="Time"
+            className="w-full border px-3 py-2 rounded"
+            required
+          />
+          <input
+            type="text"
+            name="day"
+            value={formData.day}
+            onChange={handleChange}
+            placeholder="Day"
+            className="w-full border px-3 py-2 rounded"
+            required
+          />
+          <div className="flex justify-end space-x-2">
+            <button
+              type="button"
+              className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+              onClick={onClose}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={updating}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              {updating ? "Updating..." : "Update"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 const DoctorsAllPage = () => {
   const { data, isLoading, isError, refetch } = useGetDoctorsQuery(undefined);
@@ -72,7 +177,7 @@ const DoctorsAllPage = () => {
             </tr>
           </thead>
           <tbody>
-            {doctors.map((doctor:any, i:any) => (
+            {doctors.map((doctor: any, i: any) => (
               <tr key={doctor._id} className="border-t">
                 <td className="p-3 border">{i + 1}</td>
                 <td className="p-3 border w-20">
@@ -113,13 +218,8 @@ const DoctorsAllPage = () => {
         </table>
       </div>
 
-      {/* Edit Doctor Modal */}
-      {editingDoctor && (
-        <DoctorModel
-          visible={isModalOpen}
-          doctor={editingDoctor}
-          onClose={closeModal}
-        />
+      {isModalOpen && editingDoctor && (
+        <EditDoctorModal doctor={editingDoctor} onClose={closeModal} />
       )}
     </div>
   );
