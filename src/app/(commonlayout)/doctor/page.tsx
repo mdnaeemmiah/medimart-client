@@ -30,7 +30,7 @@ const DoctorsPage = () => {
             <p className="text-gray-600">📅 {doctor.time}</p>
             <p className="text-gray-600">⏰ {doctor.date}</p>
             <p className="text-gray-600">⏰ {doctor.day}</p>
-            <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">
+            <button className="mt-4 px-4 cursor-pointer py-2 bg-violet-600 text-white rounded-xl">
               Book Appointment
             </button>
           </div>
