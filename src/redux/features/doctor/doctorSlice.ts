@@ -1,14 +1,6 @@
 import { baseApi } from "../../api/baseApi";
 
-interface Doctor {
-  _id: string;
-  name: string;
-  hospital: string;
-  date: string;
-  time: string;
-  day: string;
-  image?: string;
-}
+
 
 const doctorApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
