@@ -48,7 +48,7 @@ const EditDoctorModal = ({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">
-      <div className=" rounded p-6 w-full max-w-md shadow-lg">
+      <div className="border-2 rounded p-6 w-full max-w-md shadow-lg">
         <h2 className="text-lg font-semibold mb-4">Edit Doctor</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
