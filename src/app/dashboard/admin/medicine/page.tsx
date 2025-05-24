@@ -160,7 +160,7 @@ const AllMedicinePage = () => {
         <h2 className="text-2xl font-semibold mb-4">All Doctors</h2>
         <Link href="/dashboard/admin/doctors/add">
           <button className="border-2 border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white transition">
-            Add Doctor
+            Add Medicine
           </button>
         </Link>
       </div>
