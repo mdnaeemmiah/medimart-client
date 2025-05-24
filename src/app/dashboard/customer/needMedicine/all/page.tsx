@@ -23,18 +23,33 @@ const EditMedicineModal = ({
 
   const [formData, setFormData] = useState({
     medicineName: medicine.medicineName || "",
-    needDate: medicine.needDate || "",
+    needDate: medicine.needDate?.slice(0, 10) || "",
     contactNumber: medicine.contactNumber || "",
     requesterName: medicine.requesterName || "",
     location: medicine.location || "",
     notes: medicine.notes || "",
     status: medicine.status || "pending",
+    image: medicine.image || "",
   });
+
+  const [previewImage, setPreviewImage] = useState(medicine.image || "");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === "image" && e.target instanceof HTMLInputElement && e.target.files?.[0]) {
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setPreviewImage(imageUrl);
+
+      // You may want to upload image here to get a hosted URL
+      // For now, storing preview URL (or you can store file object to upload later)
+      setFormData({ ...formData, image: imageUrl }); 
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -50,9 +65,30 @@ const EditMedicineModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+      <div className="bg-black p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-lg font-semibold mb-4">Edit Medicine Request</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
+
+          {/* Image Preview */}
+          {previewImage && (
+            <Image
+              src={previewImage}
+              alt="Medicine"
+              width={80}
+              height={80}
+              className="rounded object-cover"
+            />
+          )}
+
+          {/* Image Upload */}
+          <input
+            type="file"
+            accept="image/*"
+            name="image"
+            onChange={handleChange}
+            className="w-full border p-2 rounded"
+          />
+
           <input
             name="medicineName"
             value={formData.medicineName}
@@ -67,7 +103,6 @@ const EditMedicineModal = ({
             value={formData.needDate}
             onChange={handleChange}
             className="w-full border p-2 rounded"
-            placeholder="Need Date"
             required
           />
           <input
@@ -105,7 +140,7 @@ const EditMedicineModal = ({
             name="status"
             value={formData.status}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
+            className="w-full border p-2 rounded bg-black"
           >
             <option value="pending">Pending</option>
             <option value="fulfilled">Fulfilled</option>
