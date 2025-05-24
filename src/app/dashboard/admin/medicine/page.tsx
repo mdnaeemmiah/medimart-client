@@ -10,6 +10,7 @@ import {
 } from "@/redux/features/medicine/medicineSlice";
 import { Trash2, Pencil } from "lucide-react";
 import { toast } from "sonner";
+import Link from "next/link";
 
 // Edit Modal Component
 const EditMedicineModal = ({
@@ -155,8 +156,13 @@ const AllMedicinePage = () => {
 
   return (
     <div className="p-4">
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-semibold mb-4">All Medicines</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl font-semibold mb-4">All Doctors</h2>
+        <Link href="/dashboard/admin/doctors/add">
+          <button className="border-2 border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white transition">
+            Add Doctor
+          </button>
+        </Link>
       </div>
 
       <div className="overflow-x-auto">
