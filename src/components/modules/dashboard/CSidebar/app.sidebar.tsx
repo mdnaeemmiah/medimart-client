@@ -36,8 +36,8 @@ const data = {
       isActive: true,
     },
     {
-      title: "Post Preferences Meal",
-      url: "postMeals",
+      title: "Need Medicine",
+      url: "needMedicine",
       icon: SquareTerminal,
       isActive: true,
     },
