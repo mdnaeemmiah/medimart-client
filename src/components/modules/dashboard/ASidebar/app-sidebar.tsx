@@ -57,9 +57,23 @@ const data = {
     },
     {
       title: "All-Medicines",
-      url: "medicine",
+      url: "/dashboard/admin/medicine",
       icon: SquareTerminal,
       isActive: true,
+            items: [
+        {
+          title: "All",
+          url: "/dashboard/admin/medicine/all",
+        },
+        {
+          title: "Add",
+          url: "/dashboard/admin/medicine/add",
+        },
+        {
+          title: "Trash",
+          url: "/dashboard/admin/medicine/trash",
+        },
+      ],
     },
     {
       title: "CustomerManage",
