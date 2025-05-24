@@ -9,7 +9,8 @@ import * as Yup from "yup";
 import { toast } from "sonner";
 import axios from "axios";
 import Image from "next/image";
-import { useCreateMedicineMutation } from "@/redux/features/medicine/medicineSlice"; // Update path accordingly
+import dayjs from "dayjs"; // ✅ Import dayjs
+import { useCreateNeedMedicineMutation } from "@/redux/features/needMedicine/needMedicineSlice";
 
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/db9egbkam/image/upload";
 const CLOUDINARY_UPLOAD_PRESET = "naeemmiah";
@@ -23,11 +24,10 @@ const validationSchema = Yup.object({
   requesterName: Yup.string().required("Requester name is required"),
   location: Yup.string().required("Location is required"),
   status: Yup.string().required("Status is required"),
-  userId: Yup.string().required("User ID is required"),
 });
 
 const CreateMedicine = () => {
-  const [createMedicine] = useCreateMedicineMutation();
+  const [createMedicine] = useCreateNeedMedicineMutation();
   const [imageUrl, setImageUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -39,7 +39,6 @@ const CreateMedicine = () => {
       requesterName: "",
       location: "",
       status: "pending",
-      userId: "",
     },
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
@@ -92,7 +91,9 @@ const CreateMedicine = () => {
       onSubmit={formik.handleSubmit}
       className="max-w-2xl mx-auto mt-10 p-6 bg-[#0A0A0A] rounded-3xl border-2 shadow-md"
     >
-      <h2 className="text-2xl font-semibold mb-6 text-center text-violet-600 dark:text-white">Add Medicine Request</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-center text-violet-600 dark:text-white">
+        Add Medicine Request
+      </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
@@ -114,7 +115,11 @@ const CreateMedicine = () => {
           <label className="block mb-1 text-sm text-gray-300">Need Date</label>
           <DatePicker
             className="w-full"
-            onChange={(date, dateString) => formik.setFieldValue("needDate", dateString)}
+            onChange={(date) => {
+              const isoDate = date ? date.toISOString() : "";
+              formik.setFieldValue("needDate", isoDate);
+            }}
+            value={formik.values.needDate ? dayjs(formik.values.needDate) : null}
           />
           {formik.touched.needDate && formik.errors.needDate && (
             <p className="text-red-500 text-xs mt-1">{formik.errors.needDate}</p>
@@ -179,21 +184,6 @@ const CreateMedicine = () => {
           />
           {formik.touched.status && formik.errors.status && (
             <p className="text-red-500 text-xs mt-1">{formik.errors.status}</p>
-          )}
-        </div>
-
-        <div className="md:col-span-2">
-          <label className="block mb-1 text-sm text-gray-300">User ID</label>
-          <input
-            type="text"
-            name="userId"
-            onChange={formik.handleChange}
-            value={formik.values.userId}
-            className="w-full p-2 border rounded"
-            placeholder="MongoDB User ID"
-          />
-          {formik.touched.userId && formik.errors.userId && (
-            <p className="text-red-500 text-xs mt-1">{formik.errors.userId}</p>
           )}
         </div>
       </div>
