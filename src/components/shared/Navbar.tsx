@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -303,8 +303,7 @@ export default function Navbar() {
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const defaultAvatar =
-    "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png";
+  // const defaultAvatar = "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png";
   const userRole =
     useAppSelector((state) => state?.auth?.user?.role) || "customer";
   const router = useRouter();

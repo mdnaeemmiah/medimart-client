@@ -32,7 +32,7 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "customerDashboard",
+      url: "/dashboard/customer/customerDashboard",
       icon: SquareTerminal,
       isActive: true,
     },
