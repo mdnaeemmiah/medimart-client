@@ -32,11 +32,11 @@ const medicineApi = baseApi.injectEndpoints({
 
     // Update a medicine (PATCH)
     updateMedicine: builder.mutation({
-  query: ({ id, body }) => ({
-    url: `/addMedicine/${id}`,
-    method: "PUT",
-    body,
-  }),
+      query: ({ id, body }) => ({
+        url: `/addMedicine/${id}`,
+        method: "PATCH",
+        body,
+      }),
       invalidatesTags: ["Medicine"],
     }),
 

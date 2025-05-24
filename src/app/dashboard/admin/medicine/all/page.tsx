@@ -38,18 +38,18 @@ const EditMedicineModal = ({
     e.preventDefault();
     try {
       // Send update with original manufacturer object, but updated fields
-      await updateMedicine({
-        _id: medicine._id,
-        body: {
-          name: formData.name,
-          price: parseFloat(formData.price),
-          stock: parseInt(formData.stock),
-          manufacturer: {
-            ...medicine.manufacturer,
-            name: formData.manufacturerName,
-          },
-        },
-      }).unwrap();
+await updateMedicine({
+  id: medicine._id, // Not _id: ...
+  body: {
+    name: formData.name,
+    price: parseFloat(formData.price),
+    stock: parseInt(formData.stock),
+    manufacturer: {
+      ...medicine.manufacturer,
+      name: formData.manufacturerName,
+    },
+  },
+}).unwrap();
       toast.success("Medicine updated successfully");
       onClose();
     } catch (error) {
