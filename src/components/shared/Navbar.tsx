@@ -384,8 +384,8 @@ return (
       ) : (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Avatar className="cursor-pointer">
-              <AvatarImage src={defaultAvatar} alt="User Avatar" />
+            <Avatar className="cursor-pointer bg-gray-800">
+              {/* <AvatarImage src={defaultAvatar} alt="User Avatar" /> */}
               <AvatarFallback>{"U"}</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
