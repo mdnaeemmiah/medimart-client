@@ -24,8 +24,9 @@ import {
 import Link from "next/link";
 import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
+import img1 from "../../../../app/assets/logo-removebg-preview.png";
+import Image from "next/image";
 // import Logo from "@/app/assets/svgs/Logo";
-
 
 const data = {
   navMain: [
@@ -40,10 +41,24 @@ const data = {
       url: "needMedicine",
       icon: SquareTerminal,
       isActive: true,
+      items: [
+        {
+          title: "All",
+          url: "/dashboard/admin/medicine/all",
+        },
+        {
+          title: "Add",
+          url: "/dashboard/admin/medicine/add",
+        },
+        {
+          title: "Trash",
+          url: "/dashboard/admin/medicine/trash",
+        },
+      ],
     },
     {
-      title: "Find Meals",
-      url: "FindMeals",
+      title: "Order History",
+      url: "orderHistory",
       icon: SquareTerminal,
       isActive: true,
     },
@@ -59,7 +74,6 @@ const data = {
     //   icon: SquareTerminal,
     //   isActive: true,
     // },
-
 
     {
       title: "Settings",
@@ -104,19 +118,22 @@ const data = {
   ],
 };
 
-export function CAppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function CAppSidebar({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
+            <SidebarMenuButton
+              size="lg"
+              asChild
+              className="flex items-center justify-center bg-gray-300"
+            >
               <Link href="/">
-                <div className="flex items-center justify-center">
-                  {/* <Logo /> */}
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <h2 className="font-bold text-xl">Meal-Box</h2>
+                <div>
+                  <Image height={40} width={40} src={img1} alt="image" />
                 </div>
               </Link>
             </SidebarMenuButton>

@@ -60,7 +60,7 @@ const data = {
       url: "/dashboard/admin/medicine",
       icon: SquareTerminal,
       isActive: true,
-            items: [
+      items: [
         {
           title: "All",
           url: "/dashboard/admin/medicine/all",
@@ -141,11 +141,15 @@ export function AAppSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon" {...props} >
+    <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild className="flex items-center justify-center bg-gray-300">
+            <SidebarMenuButton
+              size="lg"
+              asChild
+              className="flex items-center justify-center bg-gray-300"
+            >
               <Link href="/">
                 <div>
                   <Image height={40} width={40} src={img1} alt="image" />
@@ -155,7 +159,7 @@ export function AAppSidebar({
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent >
+      <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
