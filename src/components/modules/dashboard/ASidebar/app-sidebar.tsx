@@ -56,8 +56,8 @@ const data = {
       ],
     },
     {
-      title: "All-Meals",
-      url: "AllMeals",
+      title: "All-Medicines",
+      url: "medicine",
       icon: SquareTerminal,
       isActive: true,
     },
