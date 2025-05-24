@@ -143,13 +143,13 @@ const AddMedicine = () => {
           )}
         </div>
 
-        <div className="md:col-span-2 flex items-center gap-3">
+        {/* <div className="md:col-span-2 flex items-center gap-3">
           <label className="text-sm dark:text-gray-300">Requires Prescription?</label>
           <Switch
             checked={formik.values.requiresPrescription}
             onChange={(checked) => formik.setFieldValue("requiresPrescription", checked)}
           />
-        </div>
+        </div> */}
 
         <div>
           <label className="text-sm dark:text-gray-300">Manufacturer Name</label>
