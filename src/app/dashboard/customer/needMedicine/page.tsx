@@ -210,10 +210,10 @@ const AddMedicinePage = () => {
   return (
     <div className="p-4">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-semibold mb-4">All Doctors</h2>
-        <Link href="/dashboard/admin/doctors/add">
+        <h2 className="text-2xl font-semibold mb-4">Medicine</h2>
+        <Link href="/dashboard/customer/needMedicine/add">
           <button className="border-2 border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white transition">
-            Add Doctor
+            Add Medicine Request
           </button>
         </Link>
       </div>
