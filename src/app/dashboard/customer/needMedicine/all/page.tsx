@@ -46,8 +46,8 @@ const EditMedicineModal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <div className="fixed inset-0 z-50  flex items-center justify-center">
+      <div className="bg-black p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-lg font-semibold mb-4">Edit Medicine Request</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input name="medicineName" value={formData.medicineName} onChange={handleChange} className="w-full border p-2 rounded" placeholder="Medicine Name" required />
@@ -56,7 +56,7 @@ const EditMedicineModal = ({
           <input name="requesterName" value={formData.requesterName} onChange={handleChange} className="w-full border p-2 rounded" placeholder="Requester Name" required />
           <input name="location" value={formData.location} onChange={handleChange} className="w-full border p-2 rounded" placeholder="Location" required />
           <input name="notes" value={formData.notes} onChange={handleChange} className="w-full border p-2 rounded" placeholder="Notes" />
-          <select name="status" value={formData.status} onChange={handleChange} className="w-full border p-2 rounded">
+          <select name="status" value={formData.status} onChange={handleChange} className="w-full bg-black border p-2 rounded">
             <option value="pending">Pending</option>
             <option value="fulfilled">Fulfilled</option>
             <option value="cancelled">Cancelled</option>
@@ -76,6 +76,9 @@ const EditMedicineModal = ({
 const AddMedicinePage = () => {
   const { data, isLoading, isError, refetch } = useGetAllNeedMedicinesQuery(undefined);
   const [deleteNeedMedicine] = useDeleteNeedMedicineMutation();
+
+ console.log(data,"data")
+
 
   const [selectedMedicine, setSelectedMedicine] = useState<any>(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -117,6 +120,7 @@ const AddMedicinePage = () => {
             <tr>
               <th className="p-3 border">#</th>
               <th className="p-3 border">Medicine Name</th>
+              <th className="p-3 border">Image</th>
               <th className="p-3 border">Need Date</th>
               <th className="p-3 border">Requester</th>
               <th className="p-3 border">Contact</th>
@@ -129,7 +133,8 @@ const AddMedicinePage = () => {
             {medicines.map((med: any, idx: number) => (
               <tr key={med._id} className="border-t">
                 <td className="p-3 border">{idx + 1}</td>
-                <td className="p-3 border">{med.medicineName}</td>
+                <td className="p-3 border">{med?.medicineName}</td>
+                <td className="p-3 border">{med?.image}</td>
                 <td className="p-3 border">{med.needDate?.slice(0, 10)}</td>
                 <td className="p-3 border">{med.requesterName}</td>
                 <td className="p-3 border">{med.contactNumber}</td>
