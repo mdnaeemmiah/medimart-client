@@ -21,6 +21,8 @@ const EditMedicineModal = ({
 }) => {
   const [updateMedicine, { isLoading: updating }] = useUpdateMedicineMutation();
 
+
+
   const [formData, setFormData] = useState({
     name: medicine.name || "",
     manufacturerName: medicine.manufacturer?.name || "",
@@ -37,7 +39,7 @@ const EditMedicineModal = ({
     try {
       // Send update with original manufacturer object, but updated fields
       await updateMedicine({
-        id: medicine._id,
+        _id: medicine._id,
         body: {
           name: formData.name,
           price: parseFloat(formData.price),
