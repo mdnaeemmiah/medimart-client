@@ -38,7 +38,7 @@ const data = {
     },
     {
       title: "Need Medicine",
-      url: "needMedicine",
+      url: "/dashboard/customer/needMedicine",
       icon: SquareTerminal,
       isActive: true,
       items: [
@@ -54,7 +54,7 @@ const data = {
     },
     {
       title: "Need Help",
-      url: "needHelp",
+      url: "/dashboard/customer/needHelp",
       icon: SquareTerminal,
       isActive: true,
       items: [
