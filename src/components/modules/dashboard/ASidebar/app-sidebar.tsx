@@ -31,7 +31,7 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "adminDashboard",
+      url: "/dashboard/admin/adminDashboard",
       icon: SquareTerminal,
       isActive: true,
     },
@@ -75,12 +75,12 @@ const data = {
         },
       ],
     },
-    {
-      title: "CustomerManage",
-      url: "customerManage",
-      icon: SquareTerminal,
-      isActive: true,
-    },
+    // {
+    //   title: "CustomerManage",
+    //   url: "customerManage",
+    //   icon: SquareTerminal,
+    //   isActive: true,
+    // },
     {
       title: "OrderManage",
       url: "orderManage",
