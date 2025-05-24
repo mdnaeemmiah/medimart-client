@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { toast } from "sonner";
 import { useCreateMedicineMutation } from "@/redux/features/medicine/medicineSlice";
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 
 const validationSchema = Yup.object({
   id: Yup.string().required("Medicine ID is required"),
@@ -25,6 +26,7 @@ const validationSchema = Yup.object({
 const AddMedicine = () => {
   const [createMedicine] = useCreateMedicineMutation();
 //   const [imageUrl, setImageUrl] = useState("");
+  const router = useRouter(); 
 
   const formik = useFormik({
     initialValues: {
@@ -63,6 +65,7 @@ const AddMedicine = () => {
         toast.success("Medicine created successfully", { id: toastId });
         resetForm();
         // setImageUrl("");
+         router.push("/dashboard/admin/medicine/all");
       } catch (error: any) {
         console.error("❌ Error creating medicine:", error);
         toast.error(error?.data?.message || "Failed to create medicine", {
