@@ -57,6 +57,22 @@ const data = {
       ],
     },
     {
+      title: "Need Help",
+      url: "needHelp",
+      icon: SquareTerminal,
+      isActive: true,
+      items: [
+        {
+          title: "All",
+          url: "/dashboard/customer/needHelp/all",
+        },
+        {
+          title: "Add",
+          url: "/dashboard/customer/needHelp/add",
+        },
+      ],
+    },
+    {
       title: "Order History",
       url: "orderHistory",
       icon: SquareTerminal,
