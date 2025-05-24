@@ -113,7 +113,7 @@ const AddMedicinePage = () => {
 
       <div className="overflow-x-auto">
         <table className="min-w-full border text-sm text-left">
-          <thead className="bg-gray-100">
+          <thead className="bg-gray-600">
             <tr>
               <th className="p-3 border">#</th>
               <th className="p-3 border">Medicine Name</th>
