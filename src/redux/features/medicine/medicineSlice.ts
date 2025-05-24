@@ -5,7 +5,7 @@ const medicineApi = baseApi.injectEndpoints({
     // Create a new medicine
     createMedicine: builder.mutation({
       query: (medicineData) => ({
-        url: "/medicine", // POST /
+        url: "/addMedicine", // POST /
         method: "POST",
         body: medicineData,
       }),
@@ -15,7 +15,7 @@ const medicineApi = baseApi.injectEndpoints({
     // Get all medicines
     getMedicines: builder.query({
       query: () => ({
-        url: "/medicine", // GET /
+        url: "/addMedicine", // GET /
         method: "GET",
       }),
       providesTags: ["Medicine"],
@@ -24,7 +24,7 @@ const medicineApi = baseApi.injectEndpoints({
     // Get a single medicine by ID
     getSingleMedicine: builder.query({
       query: (medicineId: string) => ({
-        url: `/medicine/${medicineId}`,
+        url: `/addMedicine/${medicineId}`,
         method: "GET",
       }),
       providesTags: (result, error, id) => [{ type: "Medicine", id }],
@@ -33,7 +33,7 @@ const medicineApi = baseApi.injectEndpoints({
     // Update a medicine (PATCH)
     updateMedicine: builder.mutation({
       query: ({ medicineId, updatedData }) => ({
-        url: `/medicine/${medicineId}`,
+        url: `/addMedicine/${medicineId}`,
         method: "PATCH", // or "PUT" if you're replacing the whole document
         body: updatedData,
       }),
@@ -46,7 +46,7 @@ const medicineApi = baseApi.injectEndpoints({
     // Delete a medicine
     deleteMedicine: builder.mutation({
       query: (medicineId: string) => ({
-        url: `/medicine/${medicineId}`,
+        url: `/addMedicine/${medicineId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Medicine"],

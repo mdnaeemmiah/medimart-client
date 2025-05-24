@@ -23,7 +23,7 @@ const EditMedicineModal = ({
 
   const [formData, setFormData] = useState({
     name: medicine.name || "",
-    manufacturer: medicine.manufacturer || "",
+    manufacturerName: medicine.manufacturer?.name || "",
     price: medicine.price || "",
     stock: medicine.stock || "",
   });
@@ -35,7 +35,19 @@ const EditMedicineModal = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await updateMedicine({ id: medicine._id, body: formData }).unwrap();
+      // Send update with original manufacturer object, but updated fields
+      await updateMedicine({
+        id: medicine._id,
+        body: {
+          name: formData.name,
+          price: parseFloat(formData.price),
+          stock: parseInt(formData.stock),
+          manufacturer: {
+            ...medicine.manufacturer,
+            name: formData.manufacturerName,
+          },
+        },
+      }).unwrap();
       toast.success("Medicine updated successfully");
       onClose();
     } catch (error) {
@@ -59,10 +71,10 @@ const EditMedicineModal = ({
           />
           <input
             type="text"
-            name="manufacturer"
-            value={formData.manufacturer}
+            name="manufacturerName"
+            value={formData.manufacturerName}
             onChange={handleChange}
-            placeholder="Manufacturer"
+            placeholder="Manufacturer Name"
             className="w-full border px-3 py-2 rounded"
             required
           />
@@ -109,8 +121,6 @@ const EditMedicineModal = ({
 const AllMedicinePage = () => {
   const { data, isLoading, isError, refetch } = useGetMedicinesQuery(undefined);
   const [deleteMedicine] = useDeleteMedicineMutation();
-  console.log("medicines", data);
-
   const medicines = data?.data || [];
 
   const [editingMedicine, setEditingMedicine] = useState<any>(null);
@@ -161,12 +171,12 @@ const AllMedicinePage = () => {
           </thead>
           <tbody>
             {medicines.map((medicine: any, i: number) => (
-              <tr key={medicine._id} className="border-t">
+              <tr key={medicine?._id} className="border-t">
                 <td className="p-3 border">{i + 1}</td>
-                <td className="p-3 border">{medicine.name}</td>
-                <td className="p-3 border">{medicine.manufacturer}</td>
-                <td className="p-3 border">{medicine.price}</td>
-                <td className="p-3 border">{medicine.stock}</td>
+                <td className="p-3 border">{medicine?.name}</td>
+                <td className="p-3 border">{medicine?.manufacturer?.name}</td>
+                <td className="p-3 border">${medicine?.price?.toFixed(2)}</td>
+                <td className="p-3 border">{medicine?.stock}</td>
                 <td className="p-3 border space-x-2">
                   <button
                     className="text-blue-600 hover:text-blue-800"
@@ -176,7 +186,7 @@ const AllMedicinePage = () => {
                   </button>
                   <button
                     className="text-red-600 hover:text-red-800"
-                    onClick={() => handleDelete(medicine._id)}
+                    onClick={() => handleDelete(medicine?._id)}
                   >
                     <Trash2 size={18} />
                   </button>
