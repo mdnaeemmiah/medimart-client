@@ -5,7 +5,7 @@ const medicineApi = baseApi.injectEndpoints({
     // Create a new medicine
     createMedicine: builder.mutation({
       query: (medicineData) => ({
-        url: "/addMedicine", // POST /
+        url: "/addMedicine/create", // POST /
         method: "POST",
         body: medicineData,
       }),
