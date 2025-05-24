@@ -1,27 +1,43 @@
-"use client"; // Add this at the top
+"use client";
 import React from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+} from "recharts";
 
-const orderData = [
-  { month: "Jan", orders: 40 },
-  { month: "Feb", orders: 55 },
-  { month: "Mar", orders: 75 },
-  { month: "Apr", orders: 90 },
+// Sample data for appointments over time
+const appointmentData = [
+  { month: "Jan", appointments: 30 },
+  { month: "Feb", appointments: 45 },
+  { month: "Mar", appointments: 65 },
+  { month: "Apr", appointments: 80 },
 ];
 
-const preferenceData = [
-  { meal: "Pizza", count: 120 },
-  { meal: "Burger", count: 90 },
-  { meal: "Pasta", count: 70 },
-  { meal: "Salad", count: 50 },
+// Sample data for top prescribed medicines
+const medicineData = [
+  { medicine: "Paracetamol", count: 150 },
+  { medicine: "Amoxicillin", count: 110 },
+  { medicine: "Atorvastatin", count: 90 },
+  { medicine: "Omeprazole", count: 70 },
 ];
 
-const reviewData = [
-  { name: "5 Stars", value: 60 },
-  { name: "4 Stars", value: 25 },
-  { name: "3 Stars", value: 10 },
-  { name: "2 Stars", value: 3 },
-  { name: "1 Star", value: 2 },
+// Sample data for patient feedback
+const feedbackData = [
+  { name: "Excellent", value: 70 },
+  { name: "Good", value: 20 },
+  { name: "Average", value: 5 },
+  { name: "Poor", value: 3 },
+  { name: "Very Poor", value: 2 },
 ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#FF0000"];
@@ -29,26 +45,26 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#FF0000"];
 const CustomerGraph = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-      {/* Orders Over Time */}
-      <div className=" p-4 shadow rounded-xl">
-        <h2 className="text-lg font-semibold mb-2">Customer Orders Over Time</h2>
+      {/* Appointments Over Time */}
+      <div className="p-4 shadow rounded-xl">
+        <h2 className="text-lg font-semibold mb-2">Patient Appointments Over Time</h2>
         <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={orderData}>
+          <LineChart data={appointmentData}>
             <XAxis dataKey="month" />
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="orders" stroke="#8884d8" strokeWidth={2} />
+            <Line type="monotone" dataKey="appointments" stroke="#8884d8" strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Meal Preferences */}
-      <div className=" p-4 shadow rounded-xl">
-        <h2 className="text-lg font-semibold mb-2">Meal Preferences</h2>
+      {/* Top Prescribed Medicines */}
+      <div className="p-4 shadow rounded-xl">
+        <h2 className="text-lg font-semibold mb-2">Top Prescribed Medicines</h2>
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={preferenceData}>
-            <XAxis dataKey="meal" />
+          <BarChart data={medicineData}>
+            <XAxis dataKey="medicine" />
             <YAxis />
             <Tooltip />
             <Legend />
@@ -57,13 +73,21 @@ const CustomerGraph = () => {
         </ResponsiveContainer>
       </div>
 
-      {/* Customer Reviews */}
-      <div className=" p-4 shadow rounded-xl col-span-1 md:col-span-2">
-        <h2 className="text-lg font-semibold mb-2">Customer Reviews</h2>
+      {/* Patient Feedback */}
+      <div className="p-4 shadow rounded-xl col-span-1 md:col-span-2">
+        <h2 className="text-lg font-semibold mb-2">Patient Feedback Ratings</h2>
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
-            <Pie data={reviewData} cx="50%" cy="50%" outerRadius={100} fill="#8884d8" dataKey="value">
-              {reviewData.map((entry, index) => (
+            <Pie
+              data={feedbackData}
+              cx="50%"
+              cy="50%"
+              outerRadius={100}
+              fill="#8884d8"
+              dataKey="value"
+              label
+            >
+              {feedbackData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
@@ -77,3 +101,4 @@ const CustomerGraph = () => {
 };
 
 export default CustomerGraph;
+

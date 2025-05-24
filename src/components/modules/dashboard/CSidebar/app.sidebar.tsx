@@ -44,15 +44,15 @@ const data = {
       items: [
         {
           title: "All",
-          url: "/dashboard/admin/medicine/all",
+          url: "/dashboard/customer/medicine/all",
         },
         {
           title: "Add",
-          url: "/dashboard/admin/medicine/add",
+          url: "/dashboard/customer/medicine/add",
         },
         {
           title: "Trash",
-          url: "/dashboard/admin/medicine/trash",
+          url: "/dashboard/customer/medicine/trash",
         },
       ],
     },
