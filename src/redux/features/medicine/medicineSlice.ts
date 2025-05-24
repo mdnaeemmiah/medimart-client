@@ -34,13 +34,10 @@ const medicineApi = baseApi.injectEndpoints({
     updateMedicine: builder.mutation({
       query: ({ medicineId, updatedData }) => ({
         url: `/addMedicine/${medicineId}`,
-        method: "PATCH", // or "PUT" if you're replacing the whole document
+        method: "PUT", // or "PUT" if you're replacing the whole document
         body: updatedData,
       }),
-      invalidatesTags: (result, error, { medicineId }) => [
-        { type: "Medicine", id: medicineId },
-        "Medicine",
-      ],
+      invalidatesTags: ["Medicine"],
     }),
 
     // Delete a medicine
