@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Button, Input, Switch, DatePicker } from "antd";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -24,7 +24,7 @@ const validationSchema = Yup.object({
 
 const AddMedicine = () => {
   const [createMedicine] = useCreateMedicineMutation();
-  const [imageUrl, setImageUrl] = useState("");
+//   const [imageUrl, setImageUrl] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -62,7 +62,7 @@ const AddMedicine = () => {
         await createMedicine(medicineData).unwrap();
         toast.success("Medicine created successfully", { id: toastId });
         resetForm();
-        setImageUrl("");
+        // setImageUrl("");
       } catch (error: any) {
         console.error("❌ Error creating medicine:", error);
         toast.error(error?.data?.message || "Failed to create medicine", {
