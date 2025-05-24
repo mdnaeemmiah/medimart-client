@@ -44,7 +44,7 @@ const CustomerGraph = () => {
       </div>
 
       {/* Meal Preferences */}
-      <div className="bg-white p-4 shadow rounded-xl">
+      <div className=" p-4 shadow rounded-xl">
         <h2 className="text-lg font-semibold mb-2">Meal Preferences</h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={preferenceData}>
