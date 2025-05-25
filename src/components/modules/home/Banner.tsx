@@ -17,7 +17,7 @@ const Banner = () => {
       style={{ minWidth: "200px" }}
     >
       <div className="font-bold text-violet-600">{pair[0]}</div>
-      <div className="text-sm text-white">{pair[1]}</div>
+      <div className="text-sm ">{pair[1]}</div>
     </span>
   ));
 

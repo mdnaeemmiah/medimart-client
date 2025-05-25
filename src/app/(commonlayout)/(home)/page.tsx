@@ -9,12 +9,12 @@ import React from 'react';
 const HomePage = () => {
     return (
         <div>
+            <Banner></Banner>
             <Info></Info>
             <Heading></Heading>
             <CustomerHelp></CustomerHelp>
             <CustomerNeed></CustomerNeed>
             <Dynamic></Dynamic>
-            <Banner></Banner>
         </div>
     );
 };
