@@ -7,7 +7,7 @@ import React from 'react';
 const Page = () => {
   const { data, isLoading, isError } = useGetOrdersQuery(undefined);
 
-  const orders = data?.data || []; // Safely access array
+  const orders = data?.data || [];
 
   if (isLoading) return <p className="p-4">Loading...</p>;
   if (isError) return <p className="p-4 text-red-500">Failed to load orders.</p>;
@@ -25,19 +25,23 @@ const Page = () => {
               <tr className="bg-gray-600 text-left">
                 <th className="p-3 border-b">Order ID</th>
                 <th className="p-3 border-b">Date</th>
-                <th className="p-3 border-b">Items</th>
-                <th className="p-3 border-b">Total</th>
+                <th className="p-3 border-b">Products</th>
+                <th className="p-3 border-b">Total (৳)</th>
                 <th className="p-3 border-b">Status</th>
+                <th className="p-3 border-b">Transaction ID</th>
               </tr>
             </thead>
             <tbody>
               {orders.map((order: any) => (
-                <tr key={order.id} className="">
-                  <td className="p-3 border-b">{order.id}</td>
-                  <td className="p-3 border-b">{new Date(order.createdAt).toLocaleDateString()}</td>
-                  <td className="p-3 border-b">{order.items?.length}</td>
-                  <td className="p-3 border-b">৳{order.total}</td>
+                <tr key={order._id} className="">
+                  <td className="p-3 border-b">{order._id}</td>
+                  <td className="p-3 border-b">
+                    {new Date(order.createdAt).toLocaleDateString()}
+                  </td>
+                  <td className="p-3 border-b">{order.products?.length}</td>
+                  <td className="p-3 border-b">৳{order.totalPrice}</td>
                   <td className="p-3 border-b">{order.status}</td>
+                  <td className="p-3 border-b">{order.transaction?.id || '—'}</td>
                 </tr>
               ))}
             </tbody>
