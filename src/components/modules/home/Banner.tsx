@@ -10,7 +10,6 @@ const lines = [
 ];
 
 const Banner = () => {
-  // Repeat content twice for smooth infinite scroll
   const tickerContent = [...lines, ...lines].map((pair, i) => (
     <span
       key={i}
@@ -23,7 +22,7 @@ const Banner = () => {
   ));
 
   return (
-    <div className="w-full overflow-hidden  py-4">
+    <div className="w-full overflow-hidden py-4">
       <div
         className="whitespace-nowrap inline-block animate-scrollLeft"
         style={{ fontSize: "1.25rem" }}
@@ -34,10 +33,10 @@ const Banner = () => {
       <style jsx>{`
         @keyframes scrollLeft {
           0% {
-            transform: translateX(100%);
+            transform: translateX(0%);
           }
           100% {
-            transform: translateX(-100%);
+            transform: translateX(-50%);
           }
         }
         .animate-scrollLeft {
