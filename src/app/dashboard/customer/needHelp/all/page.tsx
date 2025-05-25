@@ -158,9 +158,7 @@ const AllNeedHelpPage = () => {
               <th className="p-3 border">Disease</th>
               <th className="p-3 border">Duration</th>
               <th className="p-3 border">Medicines</th>
-              <th className="p-3 border">Report</th>
               <th className="p-3 border">Video</th>
-              <th className="p-3 border">Created</th>
               <th className="p-3 border">Actions</th>
             </tr>
           </thead>
@@ -187,7 +185,6 @@ const AllNeedHelpPage = () => {
                 <td className="p-3 border">
                   {req.medicinesTaken?.join(", ") || "N/A"}
                 </td>
-                <td className="p-3 border max-w-xs truncate">{req.report}</td>
                 <td className="p-3 border">
                   <a
                     href={req.video}
@@ -197,9 +194,6 @@ const AllNeedHelpPage = () => {
                   >
                     Video
                   </a>
-                </td>
-                <td className="p-3 border">
-                  {new Date(req.createdAt).toLocaleDateString()}
                 </td>
                 <td className="p-3 border space-x-2">
                   <button
