@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import React, { useState } from "react";
@@ -43,6 +45,7 @@ const DoctorModel: React.FC<DoctorModelProps> = ({
 
   const handleImageChange = (
     e: React.ChangeEvent<HTMLInputElement>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setFieldValue: any
   ) => {
     const file = e.target.files?.[0];
