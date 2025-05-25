@@ -5,7 +5,7 @@ const needHelpApi = baseApi.injectEndpoints({
     // Create a new help request
     createHelpRequest: builder.mutation({
       query: (helpRequestData) => ({
-        url: "/help/create",
+        url: "/help/create", // POST /
         method: "POST",
         body: helpRequestData,
       }),
@@ -13,34 +13,34 @@ const needHelpApi = baseApi.injectEndpoints({
     }),
 
     // Get all help requests
-    getAllHelpRequests: builder.query({
+    getHelpRequests: builder.query({
       query: () => ({
-        url: "/help",
+        url: "/help", // GET /
         method: "GET",
       }),
       providesTags: ["HelpRequest"],
     }),
 
     // Get a single help request by ID
-    getHelpRequestById: builder.query({
+    getSingleHelpRequest: builder.query({
       query: (id: string) => ({
         url: `/help/${id}`,
         method: "GET",
       }),
-      providesTags: (_result, _error, id) => [{ type: "HelpRequest", id }],
+      providesTags: (result, error, id) => [{ type: "HelpRequest", id }],
     }),
 
-    // Update a help request by ID
+    // Update a help request (PATCH)
     updateHelpRequest: builder.mutation({
-      query: ({ id, ...patch }) => ({
+      query: ({ id, body }) => ({
         url: `/help/${id}`,
         method: "PATCH",
-        body: patch,
+        body,
       }),
-      invalidatesTags: (_result, _error, { id }) => [{ type: "HelpRequest", id }],
+      invalidatesTags: ["HelpRequest"],
     }),
 
-    // Delete a help request by ID
+    // Delete a help request
     deleteHelpRequest: builder.mutation({
       query: (id: string) => ({
         url: `/help/${id}`,
@@ -53,8 +53,8 @@ const needHelpApi = baseApi.injectEndpoints({
 
 export const {
   useCreateHelpRequestMutation,
-  useGetAllHelpRequestsQuery,
-  useGetHelpRequestByIdQuery,
+  useGetHelpRequestsQuery,
+  useGetSingleHelpRequestQuery,
   useUpdateHelpRequestMutation,
   useDeleteHelpRequestMutation,
 } = needHelpApi;
