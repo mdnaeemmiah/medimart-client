@@ -32,22 +32,55 @@ const EditHelpModal = ({
     video: helpRequest.video || "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const [imagePreview, setImagePreview] = useState(helpRequest.image || "");
+  const [videoPreview, setVideoPreview] = useState(helpRequest.video || "");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value, files } = e.target as HTMLInputElement;
+
+    if (name === "image" && files?.[0]) {
+      setFormData((prev) => ({ ...prev, image: files[0] }));
+      setImagePreview(URL.createObjectURL(files[0]));
+    } else if (name === "video" && files?.[0]) {
+      setFormData((prev) => ({ ...prev, video: files[0] }));
+      setVideoPreview(URL.createObjectURL(files[0]));
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const uploadData = new FormData();
+    uploadData.append("patientName", formData.patientName);
+    uploadData.append("disease", formData.disease);
+    uploadData.append("duration", formData.duration);
+    uploadData.append("report", formData.report);
+    uploadData.append(
+      "medicinesTaken",
+      JSON.stringify(
+        formData.medicinesTaken
+          .split(",")
+          .map((med) => med.trim())
+          .filter((m) => m)
+      )
+    );
+    if (formData.image instanceof File) {
+      uploadData.append("image", formData.image);
+    } else {
+      uploadData.append("image", formData.image); // for URL fallback
+    }
+    if (formData.video instanceof File) {
+      uploadData.append("video", formData.video);
+    } else {
+      uploadData.append("video", formData.video);
+    }
+
     try {
-      await updateHelpRequest({
-        id: helpRequest._id,
-        body: {
-          ...formData,
-          medicinesTaken: formData.medicinesTaken
-            .split(",")
-            .map((m: string) => m.trim()),
-        },
-      }).unwrap();
+      await updateHelpRequest({ id: helpRequest._id, body: uploadData }).unwrap();
       toast.success("Help request updated successfully");
       onClose();
     } catch (error) {
@@ -56,8 +89,8 @@ const EditHelpModal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className=" p-6 rounded-md shadow-md w-full max-w-lg">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 px-2">
+      <div className=" p-6 rounded-md shadow-md w-[95%] sm:w-full max-w-lg max-h-[90vh] overflow-y-auto">
         <h2 className="text-lg font-semibold mb-4">Edit Help Request</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -100,20 +133,34 @@ const EditHelpModal = ({
             placeholder="Medicines (comma separated)"
             className="w-full border px-3 py-2 rounded"
           />
+
+          {/* Image Upload */}
+          {imagePreview && (
+<Image
+  src={imageUrl}
+  alt="Patient"
+  width={500}
+  height={300}
+  className="rounded object-cover"
+/>
+          )}
           <input
-            type="text"
+            type="file"
             name="image"
-            value={formData.image}
+            accept="image/*"
             onChange={handleChange}
-            placeholder="Image URL"
             className="w-full border px-3 py-2 rounded"
           />
+
+          {/* Video Upload */}
+          {videoPreview && (
+            <video controls src={videoPreview} className="w-full rounded" />
+          )}
           <input
-            type="text"
+            type="file"
             name="video"
-            value={formData.video}
+            accept="video/*"
             onChange={handleChange}
-            placeholder="Video URL"
             className="w-full border px-3 py-2 rounded"
           />
 
