@@ -23,7 +23,7 @@ const Banner = () => {
   ));
 
   return (
-    <div className="w-full overflow-hidden bg-gray-100 py-4">
+    <div className="w-full overflow-hidden  py-4">
       <div
         className="whitespace-nowrap inline-block animate-scrollLeft"
         style={{ fontSize: "1.25rem" }}
