@@ -40,7 +40,7 @@ const EditHelpModal = ({
         id: helpRequest._id,
         body: {
           ...formData,
-          medicinesTaken: formData.medicinesTaken.split(",").map((m) => m.trim()),
+          medicinesTaken: formData.medicinesTaken.split(",").map((m:any) => m.trim()),
         },
       }).unwrap();
       toast.success("Help request updated successfully");
