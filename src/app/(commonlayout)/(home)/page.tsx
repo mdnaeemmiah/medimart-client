@@ -1,4 +1,5 @@
 import Banner from '@/components/modules/home/Banner';
+import CustomerHelp from '@/components/modules/home/CustomerHelp';
 import CustomerNeed from '@/components/modules/home/CustomerNeed';
 import Dynamic from '@/components/modules/home/Dynamic';
 import Heading from '@/components/modules/home/Heading';
@@ -11,6 +12,7 @@ const HomePage = () => {
             <Info></Info>
             <CustomerNeed></CustomerNeed>
             <Dynamic></Dynamic>
+            <CustomerHelp></CustomerHelp>
             <Heading></Heading>
             <Banner></Banner>
         </div>
