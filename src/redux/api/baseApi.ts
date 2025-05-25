@@ -13,7 +13,7 @@ import {
   
   
   const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api',
+    baseUrl: 'https://medimart-server-ashy.vercel.app/api',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
@@ -41,7 +41,7 @@ import {
       //* Send Refresh
       console.log('Sending refresh token');
   
-      const res = await fetch('http://localhost:5000/api/auth/refresh-token', {
+      const res = await fetch('https://medimart-server-ashy.vercel.app/api/auth/refresh-token', {
         method: 'POST',
         credentials: 'include',
       });
