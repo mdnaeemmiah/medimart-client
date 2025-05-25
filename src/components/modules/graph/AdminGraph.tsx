@@ -23,7 +23,7 @@ const data = [
 
 const MedicalDashboardGraph = () => {
   return (
-    <div className="p-4 bg-black rounded-xl shadow-md">
+    <div className="p-4 min-h-screen bg-black rounded-xl shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-violet-600">
         Doctor & Medicine Statistics (Monthly)
       </h2>
