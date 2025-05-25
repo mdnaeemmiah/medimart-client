@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import img3 from "../../../app/assets/na.jpeg";  // Corrected import for img3
 import img4 from "../../../app/assets/img12.jpeg";  // Corrected import for img4
