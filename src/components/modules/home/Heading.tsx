@@ -139,7 +139,7 @@ const Heading = () => {
           {[...districts, ...districts].map((district, index) => (
             <div
               key={index}
-              className="w-64 h-60 shadow-[0_4px_20px_rgba(0,0,0,0.5)] rounded-xl p-4 flex flex-col items-center justify-center 
+              className="w-64 h-60 border-2 shadow-[0_4px_20px_rgba(0,0,0,0.5)] rounded-xl p-4 flex flex-col items-center justify-center 
                          transition transform hover:scale-105"
             >
               <h1 className="text-lg font-bold ">{district.zila}</h1>
@@ -156,7 +156,7 @@ const Heading = () => {
         {upcomingDistricts.map((district, index) => (
           <div
             key={index}
-            className="w-64 h-60  shadow-[0_4px_20px_rgba(0,0,0,0.5)] rounded-xl p-4 flex flex-col items-center justify-center 
+            className="w-64 h-60 border-2  shadow-[0_4px_20px_rgba(0,0,0,0.5)] rounded-xl p-4 flex flex-col items-center justify-center 
                        transition transform hover:scale-105">
             <h2 className="text-lg font-bold ">{district.zila}</h2>
             <p className="text-sm text-purple-700 mt-1 font-semibold text-center">{district.medical}</p>
