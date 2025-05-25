@@ -37,40 +37,39 @@ const Dynamic = () => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % imageData.length);
     }, 3000);
-
     return () => clearInterval(interval);
   }, []);
 
-  // Create a rotating window of 4 images
+  // Create a rotating window of 4 images (looped if less than 4)
   const rotatingImages = Array.from({ length: 4 }, (_, i) => {
     const currentIndex = (index + i) % imageData.length;
     return imageData[currentIndex];
   });
 
   return (
-    <div className="flex flex-col items-center justify-center px-4 py-10">
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-violet-600">
+    <section className="w-full  py-16 px-4">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-violet-700 mb-12">
         Our Service Technology
-      </h1>
+      </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {rotatingImages.map((item, i) => (
           <div
             key={i}
-            className="shadow-xl rounded-xl p-4 flex flex-col justify-center items-center text-center"
+            className=" shadow-lg rounded-2xl overflow-hidden p-4 transition duration-500 hover:scale-[1.02] hover:shadow-xl"
           >
             <Image
               src={item.image}
               alt={item.alt}
               width={400}
               height={300}
-              className="rounded-lg object-cover transition duration-500"
+              className="rounded-lg object-cover w-full h-[220px]"
             />
-            <p className="mt-4 text-lg font-medium">{item.text}</p>
+            <p className="mt-4 text-lg font-semibold text-center">{item.text}</p>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

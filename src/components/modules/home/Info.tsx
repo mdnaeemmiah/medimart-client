@@ -46,7 +46,7 @@ import Link from "next/link";
 
 export default function Info() {
   return (
-    <section className="relative w-full h-[80vh] flex items-center justify-center text-white">
+    <section className="relative mt-3.5 w-full h-[80vh] flex items-center justify-center text-white">
       {/* Background Image */}
       <Image
         src={img1}
