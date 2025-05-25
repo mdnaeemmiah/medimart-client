@@ -3,35 +3,30 @@
 import React from "react";
 
 const lines = [
-  ["Medical", "Health Care"],
-  ["Doctor", "Specialist"],
-  ["Medicine", "Pharmacy"],
-  ["Checkup Package", "Health Check"],
+  ["Medical", "Comprehensive health services for your well-being."],
+  ["Doctor", "Expert medical specialists ready to assist you."],
+  ["Medicine", "Quality pharmaceuticals available at your fingertips."],
+  ["Checkup Package", "Affordable and thorough health screening packages."],
 ];
 
 const Banner = () => {
-  // Join each pair with a newline and separate items by dots/spaces for scrolling
-  // We use <br/> so multiline text works
-  // But for scrolling ticker, we need to render JSX inside the ticker div
-  // So instead of string join, map JSX with spans and wrap in inline-blocks
-
-  // Repeat content twice for seamless scrolling
+  // Repeat content twice for smooth infinite scroll
   const tickerContent = [...lines, ...lines].map((pair, i) => (
     <span
       key={i}
       className="inline-block mr-12 text-center"
-      style={{ minWidth: "120px" }}
+      style={{ minWidth: "200px" }}
     >
-      <div>{pair[0]}</div>
-      <div className="text-sm text-white">{pair[1]}</div>
+      <div className="font-bold text-violet-600">{pair[0]}</div>
+      <div className="text-sm text-gray-700">{pair[1]}</div>
     </span>
   ));
 
   return (
-    <div className="w-full overflow-hidden ">
+    <div className="w-full overflow-hidden bg-gray-100 py-4">
       <div
-        className="whitespace-nowrap inline-block animate-scrollLeft text-violet-600 font-semibold"
-        style={{ fontSize: "1.5rem" }}
+        className="whitespace-nowrap inline-block animate-scrollLeft"
+        style={{ fontSize: "1.25rem" }}
       >
         {tickerContent}
       </div>
@@ -47,7 +42,7 @@ const Banner = () => {
         }
         .animate-scrollLeft {
           display: inline-block;
-          animation: scrollLeft 20s linear infinite;
+          animation: scrollLeft 30s linear infinite;
         }
       `}</style>
     </div>
