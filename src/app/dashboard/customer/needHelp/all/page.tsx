@@ -64,8 +64,8 @@ const EditHelpModal = ({
       JSON.stringify(
         formData.medicinesTaken
           .split(",")
-          .map((med) => med.trim())
-          .filter((m) => m)
+          .map((med:any) => med.trim())
+          .filter((m:any) => m)
       )
     );
     if (formData.image instanceof File) {
@@ -80,7 +80,10 @@ const EditHelpModal = ({
     }
 
     try {
-      await updateHelpRequest({ id: helpRequest._id, body: uploadData }).unwrap();
+      await updateHelpRequest({
+        id: helpRequest._id,
+        body: uploadData,
+      }).unwrap();
       toast.success("Help request updated successfully");
       onClose();
     } catch (error) {
@@ -136,13 +139,13 @@ const EditHelpModal = ({
 
           {/* Image Upload */}
           {imagePreview && (
-<Image
-  src={imageUrl}
-  alt="Patient"
-  width={500}
-  height={300}
-  className="rounded object-cover"
-/>
+            <Image
+              src={imagePreview}
+              alt="Patient"
+              width={500}
+              height={300}
+              className="rounded object-cover"
+            />
           )}
           <input
             type="file"
@@ -186,9 +189,9 @@ const EditHelpModal = ({
   );
 };
 
-
 const AllNeedHelpPage = () => {
-  const { data, isLoading, isError, refetch } = useGetHelpRequestsQuery(undefined);
+  const { data, isLoading, isError, refetch } =
+    useGetHelpRequestsQuery(undefined);
   const [deleteHelpRequest] = useDeleteHelpRequestMutation();
   const [editingRequest, setEditingRequest] = useState<any>(null);
 
@@ -216,7 +219,9 @@ const AllNeedHelpPage = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-semibold text-center mb-6">All Help Requests</h2>
+      <h2 className="text-2xl font-semibold text-center mb-6">
+        All Help Requests
+      </h2>
 
       <div className="overflow-x-auto">
         <table className="min-w-full text-sm border border-gray-200 text-left">
