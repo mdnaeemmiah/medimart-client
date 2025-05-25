@@ -1,4 +1,4 @@
-import Banner from '@/components/modules/home/Banner';
+// import Banner from '@/components/modules/home/Banner';
 import CustomerHelp from '@/components/modules/home/CustomerHelp';
 import CustomerNeed from '@/components/modules/home/CustomerNeed';
 import Dynamic from '@/components/modules/home/Dynamic';
@@ -10,11 +10,12 @@ const HomePage = () => {
     return (
         <div>
             <Info></Info>
+            <Heading></Heading>
             <CustomerHelp></CustomerHelp>
             <CustomerNeed></CustomerNeed>
+            
             <Dynamic></Dynamic>
-            <Heading></Heading>
-            <Banner></Banner>
+            {/* <Banner></Banner> */}
         </div>
     );
 };
