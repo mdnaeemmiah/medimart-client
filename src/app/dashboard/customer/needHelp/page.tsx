@@ -222,9 +222,9 @@ const AllNeedHelpPage = () => {
     <div className="p-4">
          <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-semibold mb-4"> All Help Requests</h2>
-        <Link href="/dashboard/customer/needMedicine/add">
+        <Link href="/dashboard/customer/needHelp/add">
           <button className="border-2 border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white transition">
-            Add Medicine Request
+            Add Help Request
           </button>
         </Link>
       </div>
