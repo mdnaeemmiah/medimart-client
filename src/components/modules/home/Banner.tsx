@@ -17,7 +17,7 @@ const Banner = () => {
       style={{ minWidth: "200px" }}
     >
       <div className="font-bold text-violet-600">{pair[0]}</div>
-      <div className="text-sm text-gray-700">{pair[1]}</div>
+      <div className="text-sm text-white">{pair[1]}</div>
     </span>
   ));
 
@@ -41,7 +41,7 @@ const Banner = () => {
         }
         .animate-scrollLeft {
           display: inline-block;
-          animation: scrollLeft 30s linear infinite;
+          animation: scrollLeft 20s linear infinite;
         }
       `}</style>
     </div>
