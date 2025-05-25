@@ -16,8 +16,8 @@ const Banner = () => {
       className="inline-block mr-12 text-center"
       style={{ minWidth: "200px" }}
     >
-      <div className="font-bold text-violet-600">{pair[0]}</div>
-      <div className="text-sm ">{pair[1]}</div>
+      {/* <div className="font-bold text-violet-600">{pair[0]}</div> */}
+      <div className="text-sm "> <span className="font-bold text-xl text-violet-600"> {pair[0]} </span>: {pair[1]}</div>
     </span>
   ));
 
