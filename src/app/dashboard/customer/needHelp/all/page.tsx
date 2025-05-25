@@ -21,15 +21,18 @@ const EditHelpModal = ({
   onClose: () => void;
 }) => {
   const [updateHelpRequest, { isLoading }] = useUpdateHelpRequestMutation();
+
   const [formData, setFormData] = useState({
     patientName: helpRequest.patientName || "",
     disease: helpRequest.disease || "",
     duration: helpRequest.duration || "",
     report: helpRequest.report || "",
-    medicinesTaken: helpRequest.medicinesTaken.join(", ") || "",
+    medicinesTaken: helpRequest.medicinesTaken?.join(", ") || "",
+    image: helpRequest.image || "",
+    video: helpRequest.video || "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -40,7 +43,9 @@ const EditHelpModal = ({
         id: helpRequest._id,
         body: {
           ...formData,
-          medicinesTaken: formData.medicinesTaken.split(",").map((m:any) => m.trim()),
+          medicinesTaken: formData.medicinesTaken
+            .split(",")
+            .map((m: string) => m.trim()),
         },
       }).unwrap();
       toast.success("Help request updated successfully");
@@ -52,7 +57,7 @@ const EditHelpModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className="bg-white p-6 rounded-md shadow-md w-full max-w-lg">
+      <div className=" p-6 rounded-md shadow-md w-full max-w-lg">
         <h2 className="text-lg font-semibold mb-4">Edit Help Request</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -79,13 +84,13 @@ const EditHelpModal = ({
             placeholder="Duration"
             className="w-full border px-3 py-2 rounded"
           />
-          <input
-            type="text"
+          <textarea
             name="report"
             value={formData.report}
             onChange={handleChange}
             placeholder="Report"
             className="w-full border px-3 py-2 rounded"
+            rows={3}
           />
           <input
             type="text"
@@ -95,6 +100,23 @@ const EditHelpModal = ({
             placeholder="Medicines (comma separated)"
             className="w-full border px-3 py-2 rounded"
           />
+          <input
+            type="text"
+            name="image"
+            value={formData.image}
+            onChange={handleChange}
+            placeholder="Image URL"
+            className="w-full border px-3 py-2 rounded"
+          />
+          <input
+            type="text"
+            name="video"
+            value={formData.video}
+            onChange={handleChange}
+            placeholder="Video URL"
+            className="w-full border px-3 py-2 rounded"
+          />
+
           <div className="flex justify-end gap-2">
             <button
               type="button"
@@ -116,6 +138,7 @@ const EditHelpModal = ({
     </div>
   );
 };
+
 
 const AllNeedHelpPage = () => {
   const { data, isLoading, isError, refetch } = useGetHelpRequestsQuery(undefined);
