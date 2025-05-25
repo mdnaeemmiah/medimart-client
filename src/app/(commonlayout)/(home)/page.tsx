@@ -10,9 +10,9 @@ const HomePage = () => {
     return (
         <div>
             <Info></Info>
+            <CustomerHelp></CustomerHelp>
             <CustomerNeed></CustomerNeed>
             <Dynamic></Dynamic>
-            <CustomerHelp></CustomerHelp>
             <Heading></Heading>
             <Banner></Banner>
         </div>
