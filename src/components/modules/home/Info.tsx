@@ -1,86 +1,69 @@
-// import Link from "next/link";
-// import img1 from "../../../app/assets/photo-1576086213369-97a306d36557.avif";
-
-// const Info = () => {
-//   return (
-//     <div
-//       className="relative h-[600px] flex items-center justify-center bg-cover rounded-2xl bg-center my-4"
-//       style={{ backgroundImage: `url(${img1.src})` }} // ✅ Use .src
-//     >
-//       <div className="absolute inset-0 bg-opacity-50"></div>
-
-//       <div className="relative text-center text-white px-6 max-w-2xl">
-// <h1 className="text-5xl font-bold text-white shadow-2xl mb-4">
-//   MediConnect
-// </h1>
-// <p className="text-lg mb-6">
-//   Access trusted healthcare professionals at your fingertips. Book
-//   appointments, consult online, and manage your health – all in one
-//   secure platform.
-// </p>
-
-// <div className="flex justify-center gap-4">
-//   <Link href="/login">
-//     <button className="px-6 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition">
-//       Get Started
-//     </button>
-//   </Link>
-//   <Link href="/contact">
-//     <button className="px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-black transition">
-//       Contact Us
-//     </button>
-//   </Link>
-// </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Info;
-
 "use client";
 
 import Image from "next/image";
-import img1 from "../../../app/assets/photo-1576086213369-97a306d36557.avif";
 import Link from "next/link";
+import { ArrowRight, ShieldCheck, Truck, UserRoundCheck } from "lucide-react";
+import img1 from "../../../app/assets/photo-1576086213369-97a306d36557.avif";
 
 export default function Info() {
   return (
-    <section className="relative mt-3.5 w-full h-[80vh] flex items-center justify-center text-white">
-      {/* Background Image */}
+    <section className="relative min-h-[calc(100vh-10rem)] overflow-hidden text-white">
       <Image
         src={img1}
-        alt="Background"
-        layout="fill"
-        objectFit="cover"
+        alt="Healthcare professional preparing medicine"
+        fill
+        priority
+        sizes="100vw"
         quality={100}
-        className="z-0"
+        className="z-0 object-cover"
       />
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50 z-10" />
+      <div className="absolute inset-0 z-10 bg-slate-950/60" />
 
-      {/* Content */}
-      <div className="relative z-20 text-center px-4">
-        <h1 className="text-5xl font-bold text-white shadow-2xl mb-4">
-          MediConnect
-        </h1>
-        <p className="text-lg mb-6">
-          Access trusted healthcare professionals at your fingertips. Book
-          appointments, consult online, and manage your health – all in one
-          secure platform.
-        </p>
-        <div className="flex justify-center gap-4">
-          <Link href="/login">
-            <button className="px-6 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition">
-              Get Started
-            </button>
-          </Link>
-          <Link href="/contact">
-            <button className="px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-black transition">
-              Contact Us
-            </button>
-          </Link>
+      <div className="section-shell relative z-20 flex min-h-[calc(100vh-10rem)] items-center py-16">
+        <div className="max-w-3xl">
+          <p className="mb-4 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-teal-100 backdrop-blur">
+            Pharmacy, doctors, and patient support in one place
+          </p>
+          <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            MediMart
+          </h1>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-slate-100 sm:text-lg">
+            Order trusted medicines, find available doctors, and request help
+            from a healthcare platform designed to feel simple, fast, and
+            dependable.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/medicine"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-teal-500 px-6 font-semibold text-slate-950 shadow-lg shadow-teal-950/20 transition hover:bg-teal-400"
+            >
+              Shop medicines <ArrowRight className="size-4" />
+            </Link>
+            <Link
+              href="/doctor"
+              className="inline-flex h-12 items-center justify-center rounded-lg border border-white/30 px-6 font-semibold text-white backdrop-blur transition hover:bg-white hover:text-slate-950"
+            >
+              Find doctors
+            </Link>
+          </div>
+
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            {[
+              { icon: ShieldCheck, label: "Verified care" },
+              { icon: Truck, label: "Fast order flow" },
+              { icon: UserRoundCheck, label: "Doctor access" },
+            ].map(({ icon: Icon, label }) => (
+              <div
+                key={label}
+                className="flex items-center gap-3 rounded-lg border border-white/15 bg-white/10 px-4 py-3 backdrop-blur"
+              >
+                <Icon className="size-5 text-teal-200" />
+                <span className="text-sm font-semibold">{label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

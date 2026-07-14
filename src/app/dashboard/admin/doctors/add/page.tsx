@@ -7,6 +7,7 @@ import {
   Upload,
   DatePicker,
   TimePicker,
+  Input,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useFormik } from "formik";
@@ -88,19 +89,27 @@ const CreateDoctor = () => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="max-w-2xl mx-auto mt-10 p-6  bg-[#0A0A0A] rounded-3xl border-2 shadow-md"
+      className="dashboard-card relative mx-auto mt-8 max-w-3xl overflow-hidden p-6 md:p-8"
     >
-      <h2 className="text-2xl font-semibold mb-6 text-center text-violet-600 dark:text-white">Add Doctor</h2>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-br from-emerald-500/25 via-sky-400/10 to-transparent" />
+      <div className="mb-6 flex flex-col items-center text-center">
+        <span className="rounded-full border border-emerald-200/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-emerald-700 shadow-sm dark:border-emerald-400/30 dark:bg-slate-900/60 dark:text-emerald-200">
+          Doctor Desk
+        </span>
+        <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-white">Add Doctor</h2>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+          Publish appointment availability and a verified profile photo.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         <div>
-          <label className="block mb-1 text-sm  dark:text-gray-300">Name</label>
-          <input
-            type="text"
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">Name</label>
+          <Input
             name="name"
             onChange={formik.handleChange}
             value={formik.values.name}
-            className="w-full p-2 border rounded"
+            className="dashboard-input mt-2"
             placeholder="Doctor name"
           />
           {formik.touched.name && formik.errors.name && (
@@ -109,13 +118,12 @@ const CreateDoctor = () => {
         </div>
 
         <div>
-          <label className="block mb-1 text-sm  dark:text-gray-300">Hospital</label>
-          <input
-            type="text"
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">Hospital</label>
+          <Input
             name="hospital"
             onChange={formik.handleChange}
             value={formik.values.hospital}
-            className="w-full p-2 border rounded"
+            className="dashboard-input mt-2"
             placeholder="Hospital name"
           />
           {formik.touched.hospital && formik.errors.hospital && (
@@ -124,9 +132,9 @@ const CreateDoctor = () => {
         </div>
 
         <div>
-          <label className="block mb-1 text-sm  dark:text-gray-300">Date</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">Date</label>
           <DatePicker
-            className="w-full"
+            className="dashboard-input mt-2 w-full"
             onChange={(date, dateString) => formik.setFieldValue("date", dateString)}
           />
           {formik.touched.date && formik.errors.date && (
@@ -135,11 +143,11 @@ const CreateDoctor = () => {
         </div>
 
         <div>
-          <label className="block mb-1 text-sm  dark:text-gray-300">Time</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">Time</label>
           <TimePicker
             use12Hours
             format="h:mm A"
-            className="w-full"
+            className="dashboard-input mt-2 w-full"
             onChange={(time, timeString) => formik.setFieldValue("time", timeString)}
           />
           {formik.touched.time && formik.errors.time && (
@@ -148,13 +156,12 @@ const CreateDoctor = () => {
         </div>
 
         <div className="md:col-span-2">
-          <label className="block mb-1 text-sm  dark:text-gray-300">Day</label>
-          <input
-            type="text"
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">Day</label>
+          <Input
             name="day"
             onChange={formik.handleChange}
             value={formik.values.day}
-            className="w-full p-2 border rounded"
+            className="dashboard-input mt-2"
             placeholder="Day (e.g., Monday)"
           />
           {formik.touched.day && formik.errors.day && (
@@ -163,31 +170,33 @@ const CreateDoctor = () => {
         </div>
       </div>
 
-      <div className="mt-4">
-        <label className="block mb-1 text-sm  dark:text-gray-300">Doctor Image</label>
-        <Upload beforeUpload={handleImageUpload} showUploadList={false}>
-          <Button icon={<UploadOutlined />} loading={loading}>
-            {loading ? "Uploading..." : "Upload Image"}
-          </Button>
-        </Upload>
-        {imageUrl && (
-          <div className="mt-4 text-center">
-            <Image
-              src={imageUrl}
-              alt="Doctor"
-              width={80}
-              height={80}
-              className="object-cover rounded border"
-              style={{ borderColor: "#ddd" }}
-            />
-          </div>
-        )}
+      <div className="mt-6">
+        <label className="text-sm font-medium text-slate-700 dark:text-slate-200">Doctor Image</label>
+        <div className="mt-2 flex flex-wrap items-center gap-4">
+          <Upload beforeUpload={handleImageUpload} showUploadList={false}>
+            <Button icon={<UploadOutlined />} loading={loading} className="h-10">
+              {loading ? "Uploading..." : "Upload Image"}
+            </Button>
+          </Upload>
+          {imageUrl && (
+            <div className="rounded-2xl border border-slate-200/60 bg-white/70 px-4 py-3 shadow-sm dark:border-white/10 dark:bg-slate-900/60">
+              <Image
+                src={imageUrl}
+                alt="Doctor"
+                width={72}
+                height={72}
+                className="rounded-xl object-cover"
+              />
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="mt-6 text-center">
-        <Button type="primary" htmlType="submit">
+      <div className="mt-8 flex flex-col items-center gap-2 text-center">
+        <Button type="primary" htmlType="submit" className="h-10 px-8 shadow-lg shadow-emerald-500/20">
           Submit
         </Button>
+        <p className="text-xs text-slate-500 dark:text-slate-400">Your doctor profile goes live immediately.</p>
       </div>
     </form>
   );

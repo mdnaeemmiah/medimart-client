@@ -12,32 +12,34 @@ const CustomerNeed = () => {
   if (isError) return <p className="text-center py-10 text-red-500">Failed to load data.</p>;
 
   return (
-    <section className="px-4 py-10 ">
-      <h2 className="text-3xl font-bold text-center mb-10 text-violet-700">
-       Customer  Requested Medicines
-      </h2>
+    <section className="section-shell py-16">
+      <div className="mb-8 text-center">
+        <p className="section-kicker">Community requests</p>
+        <h2 className="section-title mt-3">Customer Requested Medicines</h2>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {data?.data?.map((item: any) => (
           <div
             key={item._id}
-            className="border-2 shadow-md rounded-xl overflow-hidden p-4 hover:shadow-xl transition duration-300"
+            className="surface-card overflow-hidden rounded-lg p-4 transition duration-300 hover:-translate-y-1 hover:shadow-md"
           >
             <Image
               src={item.image || '/placeholder-medicine.jpg'}
               alt={item.medicineName}
               width={400}
               height={250}
-              className="rounded-md w-full h-[200px] object-cover mb-4"
+              className="mb-4 h-[200px] w-full rounded-md object-cover"
             />
 
-            <h3 className="text-xl font-semibold text-blue-600 mb-2">{item.medicineName}</h3>
+            <h3 className="mb-3 text-xl font-semibold text-slate-950 dark:text-white">{item.medicineName}</h3>
 
-            <p><span className="font-medium">Need Date:</span> {item.needDate}</p>
-            <p><span className="font-medium">Requester:</span> {item.requesterName}</p>
-            <p><span className="font-medium">Contact:</span> {item.contactNumber}</p>
-            <p><span className="font-medium">Location:</span> {item.location}</p>
-            <p>
+            <div className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+            <p><span className="font-medium text-slate-900 dark:text-white">Need Date:</span> {item.needDate}</p>
+            <p><span className="font-medium text-slate-900 dark:text-white">Requester:</span> {item.requesterName}</p>
+            <p><span className="font-medium text-slate-900 dark:text-white">Contact:</span> {item.contactNumber}</p>
+            <p><span className="font-medium text-slate-900 dark:text-white">Location:</span> {item.location}</p>
+            <p className="pt-2">
               <span className="font-medium">Status:</span>{' '}
               <span className={`inline-block px-2 py-1 rounded text-sm ${
                 item.status === 'pending'
@@ -49,6 +51,7 @@ const CustomerNeed = () => {
                 {item.status}
               </span>
             </p>
+            </div>
           </div>
         ))}
       </div>

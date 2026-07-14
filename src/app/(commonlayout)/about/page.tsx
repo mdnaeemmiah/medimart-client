@@ -5,7 +5,7 @@ import React from 'react';
 
 const AboutPage = () => {
     return (
-        <div className='my-5'>
+        <div className='space-y-16 py-16'>
             <Banner></Banner>
             <Question></Question>
             <Company></Company>

@@ -85,10 +85,12 @@ const responsive = {
 
 const Company = () => {
   return (
-    <div className="w-full mx-auto p-6 shadow-[0_4px_20px_rgba(0,0,0,0.5)] rounded-xl  mt-10">
-      <h2 className="text-3xl font-bold text-center text-purple-700 mb-6">
-        Meet Our Healthcare Experts
-      </h2>
+    <section className="section-shell">
+    <div className="surface-card rounded-lg p-6 md:p-10">
+      <div className="mb-8 text-center">
+        <p className="section-kicker">Care experts</p>
+        <h2 className="section-title mt-3">Meet Our Healthcare Experts</h2>
+      </div>
       <Carousel
         responsive={responsive}
         infinite
@@ -105,17 +107,18 @@ const Company = () => {
               height={160}
               src={provider.image}
               alt={provider.name}
-              className="w-40 h-40 mx-auto rounded-full shadow-md border-4 border-purple-500"
+              className="mx-auto size-40 rounded-full border-4 border-teal-50 object-cover shadow-sm dark:border-teal-400/10"
             />
-            <h3 className="text-2xl font-semibold  mt-4">
+            <h3 className="mt-4 text-2xl font-semibold text-slate-950 dark:text-white">
               {provider.name}
             </h3>
-            <p className="text-sm text-gray-200">{provider.experience}</p>
-            <p className="text-gray-300 mt-2">{provider.description}</p>
+            <p className="text-sm text-teal-700 dark:text-teal-300">{provider.experience}</p>
+            <p className="mt-2 text-slate-600 dark:text-slate-300">{provider.description}</p>
           </div>
         ))}
       </Carousel>
     </div>
+    </section>
   );
 };
 

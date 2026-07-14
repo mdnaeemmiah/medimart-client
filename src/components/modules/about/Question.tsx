@@ -11,18 +11,19 @@ import img1 from "../../../app/assets/download (4).jpeg";
 
 const Question = () => {
   return (
-    <div className="w-full mx-auto p-6 shadow-[0_4px_20px_rgba(0,0,0,0.5)] rounded-xl  mt-10">
-      <h2 className="text-3xl font-bold text-center text-purple-700 mb-6">
-        Frequently Asked Questions
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-        {/* Left Side - Accordion */}
+    <section className="section-shell">
+    <div className="surface-card rounded-lg p-6 md:p-10">
+      <div className="mb-8 text-center">
+        <p className="section-kicker">FAQ</p>
+        <h2 className="section-title mt-3">Frequently Asked Questions</h2>
+      </div>
+      <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
         <div>
           <Accordion type="single" collapsible>
             <AccordionItem value="q1">
-              <AccordionTrigger>What is Medicine Hub?</AccordionTrigger>
+              <AccordionTrigger>What is MediMart?</AccordionTrigger>
               <AccordionContent>
-                Medicine Hub is an online healthcare platform that connects
+                MediMart is an online healthcare platform that connects
                 users with reliable pharmacies and healthcare providers,
                 offering a wide range of medicines and health services.
               </AccordionContent>
@@ -42,7 +43,7 @@ const Question = () => {
               <AccordionContent>
                 Absolutely! Licensed pharmacies, clinics, and healthcare
                 professionals can sign up to offer their products or services
-                through Medicine Hub.
+                through MediMart.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="q4">
@@ -59,25 +60,25 @@ const Question = () => {
                 How do I contact customer support?
               </AccordionTrigger>
               <AccordionContent>
-                You can reach our support team at support@medicinehub.com or use
+                You can reach our support team at support@medimart.com or use
                 the contact form available on our website for assistance.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
         </div>
 
-        {/* Right Side - Image */}
         <div className="flex justify-center">
           <Image
             width={500}
             height={500}
             src={img1}
             alt="FAQ Illustration"
-            className="w-full max-w-sm rounded-xl shadow-lg"
+            className="w-full max-w-sm rounded-lg object-cover"
           />
         </div>
       </div>
     </div>
+    </section>
   );
 };
 

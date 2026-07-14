@@ -3,29 +3,32 @@ import img1 from "../../../app/assets/img1.avif";
 
 const Banner = () => {
   return (
-    <div className="flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.5)] md:flex-row items-center gap-8 p-6 md:p-12  rounded-lg ">
-      {/* Left Side - Image */}
-      <div className="w-full md:w-1/2">
+    <section className="section-shell">
+    <div className="surface-card grid items-center gap-8 rounded-lg p-6 md:grid-cols-2 md:p-10">
+      <div className="w-full">
         <Image
           src={img1}
-          alt="MealBox Banner"
+          alt="MediMart healthcare team"
           width={600}
           height={400}
-          className="w-full h-auto rounded-xl shadow-lg"
+          className="h-auto w-full rounded-lg object-cover"
         />
       </div>
 
-      {/* Right Side - Text Content */}
-      <div className="w-full md:w-1/2 text-center md:text-left">
-  <h1 className="text-4xl font-bold text-purple-700 mb-4">Welcome to Medicine Hub</h1>
-  <p className="text-lg text-gray-600 mb-6">
-    Discover trusted healthcare solutions and essential medicines, all in one place. Whether you are a customer seeking reliable medical products or a provider offering quality healthcare services, Medicine Hub connects health seekers with the care they need.
+      <div className="text-center md:text-left">
+  <p className="section-kicker">About MediMart</p>
+  <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl dark:text-white">Healthcare access made simpler</h1>
+  <p className="mt-5 text-base leading-7 text-slate-600 dark:text-slate-300">
+    Discover trusted healthcare solutions and essential medicines in one place.
+    Whether you are seeking reliable products or connecting with providers,
+    MediMart keeps the experience clear, secure, and easy to navigate.
   </p>
-  <button className="bg-[#EF1F76] text-white py-2 px-6 rounded-lg font-semibold hover:bg-[#C51963] transition duration-300">
+  <button className="primary-action mt-6 rounded-lg px-6 py-3 font-semibold transition">
     Explore More
   </button>
 </div>
     </div>
+    </section>
   );
 };
 

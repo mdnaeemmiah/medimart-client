@@ -31,7 +31,7 @@ const Theme = () => {
     <div className="flex items-center gap-2">
       <button
         onClick={toggleTheme}
-        className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 transition text-black dark:text-white"
+        className="grid size-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-teal-300 hover:text-teal-700 dark:border-white/10 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-teal-400"
         aria-label="Toggle Theme"
       >
         {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}

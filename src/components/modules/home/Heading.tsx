@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 const Heading = () => {
   const [time, setTime] = useState(new Date());
 
-  const [districts, setDistricts] = useState([
+  const [districts] = useState([
     {
       zila: 'Dhaka',
       medical: 'Dhaka Medical College Hospital',
@@ -84,7 +84,7 @@ const Heading = () => {
     },
   ]);
 
-  const [upcomingDistricts, setUpcomingDistricts] = useState([
+  const [upcomingDistricts] = useState([
     {
       zila: 'Brahmanbaria',
       medical: 'Brahmanbaria Medical Institute',
@@ -115,57 +115,59 @@ const Heading = () => {
   }, []);
 
   return (
-    <div className="w-full py-6 text-center">
-      <h2 className="text-3xl font-bold text-purple-700 mb-2">
+    <section className="section-shell py-16 text-center">
+      <p className="section-kicker">Bangladesh network</p>
+      <h2 className="section-title mt-3">
         Explore Medical Services by District
       </h2>
-  
-      <p className="text-lg mb-4 px-4">
-        Discover trusted healthcare services from across Bangladesh. Each district offers
-        specialized treatments, clinics, and hospitals to ensure quality care.
+
+      <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-300">
+        Discover trusted healthcare services from across Bangladesh. Each
+        district offers specialized treatments, clinics, and hospitals to ensure
+        quality care.
       </p>
 
-      <p className="text-sm  mb-6">
-        Current Date & Time:{' '}
-        <span className="font-semibold text-blue-600">
+      <p className="mt-5 text-sm text-slate-500 dark:text-slate-400">
+        Current date and time:{" "}
+        <span className="font-semibold text-teal-700 dark:text-teal-300">
           {time.toLocaleDateString()} {time.toLocaleTimeString()}
         </span>
       </p>
 
-      {/* Medical Branches */}
-      <h3 className="text-xl font-semibold mb-2 text-orange-500">Medical Branches</h3>
-      <div className="overflow-hidden w-full mb-10">
-        <div className="flex gap-6 animate-marquee whitespace-nowrap">
+      <h3 className="mb-4 mt-10 text-xl font-semibold text-slate-900 dark:text-white">
+        Active Medical Branches
+      </h3>
+      <div className="mb-10 w-full overflow-hidden">
+        <div className="flex gap-5 animate-marquee whitespace-nowrap">
           {[...districts, ...districts].map((district, index) => (
             <div
               key={index}
-              className="w-64 h-60 border-2 shadow-[0_4px_20px_rgba(0,0,0,0.5)] rounded-xl p-4 flex flex-col items-center justify-center 
-                         transition transform hover:scale-105"
+              className="surface-card flex h-56 w-64 shrink-0 flex-col items-center justify-center rounded-lg p-5 transition hover:-translate-y-1 hover:border-teal-200 hover:shadow-md dark:hover:border-teal-400/30"
             >
-              <h1 className="text-lg font-bold ">{district.zila}</h1>
-              <p className="text-sm text-purple-700 mt-1 font-semibold text-center">{district.medical}</p>
-              <p className="text-sm text-gray-600 mt-2 text-center">{district.services}</p>
+              <h1 className="text-lg font-bold text-slate-950 dark:text-white">{district.zila}</h1>
+              <p className="mt-2 text-center text-sm font-semibold text-teal-700 dark:text-teal-300">{district.medical}</p>
+              <p className="mt-3 text-center text-sm text-slate-600 dark:text-slate-300">{district.services}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Upcoming Medical Branches */}
-      <h3 className="text-xl font-semibold mb-2 text-green-500">Upcoming Medical Branches</h3>
-      <div className="flex  justify-center gap-6">
+      <h3 className="mb-4 text-xl font-semibold text-slate-900 dark:text-white">
+        Upcoming Medical Branches
+      </h3>
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {upcomingDistricts.map((district, index) => (
           <div
             key={index}
-            className="w-64 h-60 border-2  shadow-[0_4px_20px_rgba(0,0,0,0.5)] rounded-xl p-4 flex flex-col items-center justify-center 
-                       transition transform hover:scale-105">
-            <h2 className="text-lg font-bold ">{district.zila}</h2>
-            <p className="text-sm text-purple-700 mt-1 font-semibold text-center">{district.medical}</p>
-            <p className="text-sm text-gray-600 mt-2 text-center">{district.services}</p>
-            <span className="text-xs mt-2 text-red-500 font-medium">Coming Soon</span>
+            className="surface-card flex min-h-56 flex-col items-center justify-center rounded-lg p-5 transition hover:-translate-y-1 hover:shadow-md">
+            <h2 className="text-lg font-bold text-slate-950 dark:text-white">{district.zila}</h2>
+            <p className="mt-2 text-center text-sm font-semibold text-teal-700 dark:text-teal-300">{district.medical}</p>
+            <p className="mt-3 text-center text-sm text-slate-600 dark:text-slate-300">{district.services}</p>
+            <span className="mt-4 rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-400/10 dark:text-amber-300">Coming Soon</span>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -6,8 +6,8 @@ export const dynamic = "force-dynamic";
 export default function UserDashboard() {
 
     return (
-      <div>
-        <div className="min-h-[100vh] rounded-xl  mt-4 ">
+      <div className="py-4">
+        <div className="min-h-screen">
           <CustomerGraph></CustomerGraph>
         </div>
       </div>

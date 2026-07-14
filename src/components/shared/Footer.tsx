@@ -1,54 +1,56 @@
-import Link from 'next/link';
+import Link from "next/link";
+import { Facebook, Instagram, Mail, MapPin, Phone, Youtube } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className=" py-10 px-6 shadow-[0_10px_60px_rgba(0,0,0,0.25)]">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Column 1: About Our Company */}
+    <footer className="border-t border-slate-200 bg-white px-6 py-12 dark:border-white/10 dark:bg-slate-950">
+      <div className="section-shell grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <h2 className="text-lg font-bold mb-3">About Our Company</h2>
-          <p className="text-gray-400 text-sm">
-            Meal Hub is dedicated to providing fresh, healthy, and delicious meals for our customers. Our goal is to make every meal an experience to remember.
+          <h2 className="mb-3 text-lg font-bold text-slate-950 dark:text-white">MediMart</h2>
+          <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">
+            Trusted medicines, doctor access, and patient support in one calm,
+            secure healthcare marketplace.
           </p>
         </div>
 
-        {/* Column 2: About Our Food */}
         <div>
-          <h2 className="text-lg font-bold mb-3">About Our Food</h2>
-          <ul className="text-gray-400 text-sm space-y-2">
-            <li>Fresh Ingredients</li>
-            <li>Healthy & Nutritious</li>
-            <li>Chef-Crafted Dishes</li>
-            <li>100% Organic Options</li>
+          <h2 className="mb-3 text-lg font-bold text-slate-950 dark:text-white">Care Services</h2>
+          <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+            <li>Verified medicines</li>
+            <li>Doctor appointments</li>
+            <li>Prescription-aware orders</li>
+            <li>Patient request support</li>
           </ul>
         </div>
 
-        {/* Column 3: Quick Links */}
         <div>
-          <h2 className="text-lg font-bold mb-3">Quick Links</h2>
-          <ul className="text-gray-400 text-sm space-y-2">
-            <li><Link href="/" className="hover:text-blue-400">Home</Link></li>
-            <li><Link href="/about" className="hover:text-blue-400">About Us</Link></li>
-            <li><Link href="/menu" className="hover:text-blue-400">Our Menu</Link></li>
-            <li><Link href="/contact" className="hover:text-blue-400">Contact Us</Link></li>
+          <h2 className="mb-3 text-lg font-bold text-slate-950 dark:text-white">Quick Links</h2>
+          <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+            <li><Link href="/" className="hover:text-teal-600">Home</Link></li>
+            <li><Link href="/medicine" className="hover:text-teal-600">Shop</Link></li>
+            <li><Link href="/doctor" className="hover:text-teal-600">Doctors</Link></li>
+            <li><Link href="/about" className="hover:text-teal-600">About</Link></li>
+            <li><Link href="/contact" className="hover:text-teal-600">Contact</Link></li>
           </ul>
         </div>
 
-        {/* Column 4: Social Media Links */}
         <div>
-          <h2 className="text-lg font-bold mb-3">Follow Us</h2>
-          <div className="flex space-x-4">
-            <a href="https://facebook.com" className="hover:text-blue-400" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i> Facebook</a>
-            <a href="https://twitter.com" className="hover:text-blue-400" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i> Twitter</a>
-            <a href="https://instagram.com" className="hover:text-blue-400" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i> Instagram</a>
-            <a href="https://youtube.com" className="hover:text-blue-400" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i> YouTube</a>
+          <h2 className="mb-3 text-lg font-bold text-slate-950 dark:text-white">Contact</h2>
+          <div className="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+            <p className="flex items-center gap-2"><MapPin className="size-4 text-teal-600" /> Dhaka, Bangladesh</p>
+            <p className="flex items-center gap-2"><Phone className="size-4 text-teal-600" /> +880 1234 567890</p>
+            <p className="flex items-center gap-2"><Mail className="size-4 text-teal-600" /> support@medimart.com</p>
+          </div>
+          <div className="mt-5 flex gap-3">
+            <a href="https://facebook.com" aria-label="Facebook" className="grid size-9 place-items-center rounded-full bg-slate-100 text-slate-700 hover:bg-teal-100 hover:text-teal-700 dark:bg-white/10 dark:text-slate-200"><Facebook className="size-4" /></a>
+            <a href="https://instagram.com" aria-label="Instagram" className="grid size-9 place-items-center rounded-full bg-slate-100 text-slate-700 hover:bg-teal-100 hover:text-teal-700 dark:bg-white/10 dark:text-slate-200"><Instagram className="size-4" /></a>
+            <a href="https://youtube.com" aria-label="YouTube" className="grid size-9 place-items-center rounded-full bg-slate-100 text-slate-700 hover:bg-teal-100 hover:text-teal-700 dark:bg-white/10 dark:text-slate-200"><Youtube className="size-4" /></a>
           </div>
         </div>
       </div>
 
-      {/* Bottom Section */}
-      <div className="text-center text-gray-500 text-sm mt-6 border-t border-gray-700 pt-4">
-        © {new Date().getFullYear()} Meal Hub. All Rights Reserved.
+      <div className="section-shell mt-10 border-t border-slate-200 pt-6 text-center text-sm text-slate-500 dark:border-white/10 dark:text-slate-400">
+        &copy; {new Date().getFullYear()} MediMart. All rights reserved.
       </div>
     </footer>
   );

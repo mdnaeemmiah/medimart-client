@@ -1,16 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { BadgeCheck, CalendarClock, Factory, Package, ShoppingCart } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/features/cart/cartSlice";
-import { toast } from "sonner";
-import Link from "next/link";
 import { getMedicines } from "@/service/shopService";
 
 interface MedicineType {
-  id:string;
+  id: string;
   _id: string;
   name: string;
   description: string;
@@ -26,24 +26,26 @@ interface MedicineType {
 }
 
 const MedicineShop = () => {
-  const [medicines, setProviders] = useState<MedicineType[]>([]);
-
+  const [medicines, setMedicines] = useState<MedicineType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const fetchProviders = async () => {
+    const fetchMedicines = async () => {
       try {
         const result = await getMedicines();
         if (result?.success && Array.isArray(result.data)) {
-          setProviders(result.data);
+          setMedicines(result.data);
         }
       } catch (error) {
-        console.error("Error fetching providers:", error);
+        console.error("Error fetching medicines:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
-    fetchProviders();
-  }, []);
 
+    fetchMedicines();
+  }, []);
 
   const handleAddToCart = (medicine: MedicineType) => {
     dispatch(
@@ -53,45 +55,107 @@ const MedicineShop = () => {
         price: medicine.price,
         quantity: 1,
         stock: medicine.stock,
-        imageUrl: "/medicine.svg", // Placeholder or use a real one
+        imageUrl: "/medicine.svg",
       })
     );
-    toast.success(`${medicine.name} added to cart!`);
+    toast.success(`${medicine.name} added to cart.`);
   };
 
   return (
-    <div className="p-4  shadow-lg rounded-2xl   text-center">
-      <h2 className="text-xl text-violet-600 font-semibold mb-4">Available Medicines</h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
-        {medicines.map((medicine) => (
-          <div
-            key={medicine._id}
-            className="p-4 border-2 rounded-lg  shadow-[0_4px_20px_rgba(0,0,0,0.5)]  transition-transform duration-300 hover:scale-100"
-          >
-            <p ><strong>ID:</strong> {medicine.id}</p>
-            <p ><strong>Name:</strong> {medicine.name}</p>
-            <p ><strong>Description:</strong> {medicine.description}</p>
-            <p ><strong>Price:</strong> ${medicine.price}</p>
-            <p ><strong>Stock:</strong> {medicine.stock}</p>
-            <p ><strong>Requires Prescription:</strong> {medicine.requiresPrescription ? "Yes" : "No"}</p>
-            <p ><strong>Expiry Date:</strong> {medicine.expiryDate}</p>
-            <p ><strong>Manufacturer:</strong> {medicine.manufacturer.name}</p>
-            <p ><strong>Address:</strong> {medicine.manufacturer.address}</p>
-            <p ><strong>Contact:</strong> {medicine.manufacturer.contact}</p>
-
-            <Link href={`/medicine/${medicine._id}`}>
-              <p className="text-green-500 font-bold underline pt-3 text-center">View Details</p>
-            </Link>
-           
-            <Button onClick={() => handleAddToCart(medicine)} className="mt-4 w-full">
-              <ShoppingCart className="w-5 h-5 mr-2" />
-              Add to Cart
-            </Button>
-          </div>
-        ))}
+    <section className="section-shell py-16">
+      <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div>
+          <p className="section-kicker">MediMart shop</p>
+          <h2 className="section-title mt-3">Available Medicines</h2>
+          <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-300">
+            Browse stocked medicines with prescription details, expiry dates,
+            and manufacturer information before adding them to your cart.
+          </p>
+        </div>
+        <div className="rounded-full bg-teal-50 px-4 py-2 text-sm font-semibold text-teal-700 dark:bg-teal-400/10 dark:text-teal-300">
+          {medicines.length} items listed
+        </div>
       </div>
-    </div>
+
+      {isLoading ? (
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {[1, 2, 3].map((item) => (
+            <div
+              key={item}
+              className="surface-card h-72 animate-pulse rounded-lg bg-slate-100 dark:bg-white/10"
+            />
+          ))}
+        </div>
+      ) : medicines.length ? (
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {medicines.map((medicine) => (
+            <article
+              key={medicine._id}
+              className="surface-card flex min-h-[360px] flex-col rounded-lg p-5 transition hover:-translate-y-1 hover:border-teal-200 hover:shadow-md dark:hover:border-teal-400/30"
+            >
+              <div className="mb-4 flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+                    {medicine.id || "Medicine"}
+                  </p>
+                  <h3 className="mt-2 text-xl font-bold text-slate-950 dark:text-white">
+                    {medicine.name}
+                  </h3>
+                </div>
+                <span className="rounded-full bg-teal-50 px-3 py-1 text-sm font-bold text-teal-700 dark:bg-teal-400/10 dark:text-teal-300">
+                  ${medicine.price}
+                </span>
+              </div>
+
+              <p className="line-clamp-3 flex-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                {medicine.description}
+              </p>
+
+              <div className="mt-5 grid gap-3 text-sm text-slate-600 dark:text-slate-300">
+                <p className="flex items-center gap-2">
+                  <Package className="size-4 text-teal-600" />
+                  {medicine.stock} in stock
+                </p>
+                <p className="flex items-center gap-2">
+                  <CalendarClock className="size-4 text-teal-600" />
+                  Expires {medicine.expiryDate}
+                </p>
+                <p className="flex items-center gap-2">
+                  <Factory className="size-4 text-teal-600" />
+                  {medicine.manufacturer?.name}
+                </p>
+                <p className="flex items-center gap-2">
+                  <BadgeCheck className="size-4 text-teal-600" />
+                  {medicine.requiresPrescription
+                    ? "Prescription required"
+                    : "No prescription required"}
+                </p>
+              </div>
+
+              <div className="mt-6 flex gap-3">
+                <Button className="primary-action flex-1 rounded-lg" onClick={() => handleAddToCart(medicine)}>
+                  <ShoppingCart className="size-4" />
+                  Add
+                </Button>
+                <Button variant="outline" className="flex-1 rounded-lg" asChild>
+                  <Link href={`/medicine/${medicine._id}`}>Details</Link>
+                </Button>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div className="surface-card rounded-lg p-10 text-center">
+          <Package className="mx-auto mb-3 size-10 text-slate-300" />
+          <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
+            No medicines available
+          </h3>
+          <p className="mt-2 text-sm text-slate-500">
+            Please check back after new stock is added.
+          </p>
+        </div>
+      )}
+    </section>
   );
 };
 

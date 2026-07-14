@@ -13,19 +13,21 @@ const Banner = () => {
   const tickerContent = [...lines, ...lines].map((pair, i) => (
     <span
       key={i}
-      className="inline-block mr-12 text-center"
-      style={{ minWidth: "200px" }}
+      className="mr-6 inline-flex min-w-[260px] items-center justify-center gap-2 rounded-full border border-teal-100 bg-white px-5 py-2 text-center shadow-sm dark:border-teal-400/20 dark:bg-white/10"
     >
-      {/* <div className="font-bold text-violet-600">{pair[0]}</div> */}
-      <div className="text-sm  "> <span className="font-bold text-xl text-violet-600"> {pair[0]} </span>: {pair[1]}</div>
+      <span className="font-bold text-teal-700 dark:text-teal-300">
+        {pair[0]}
+      </span>
+      <span className="text-sm text-slate-600 dark:text-slate-300">
+        {pair[1]}
+      </span>
     </span>
   ));
 
   return (
-    <div className="w-full overflow-hidden py-4">
+    <div className="w-full overflow-hidden border-b border-slate-200 bg-slate-50 py-3 dark:border-white/10 dark:bg-slate-950">
       <div
         className="whitespace-nowrap inline-block animate-scrollLeft"
-        style={{ fontSize: "1.25rem" }}
       >
         {tickerContent}
       </div>

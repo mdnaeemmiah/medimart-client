@@ -26,61 +26,62 @@ const CustomerHelp = () => {
   }
 
   return (
-    <div>
-      <h2 className="mt-4 text-3xl font-bold text-center  text-violet-700">
-        Customer Section
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-6">
+    <section className="section-shell py-16">
+      <div className="mb-8 text-center">
+        <p className="section-kicker">Patient support</p>
+        <h2 className="section-title mt-3">Customer Help Requests</h2>
+      </div>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {data?.data?.map((item: any, index: number) => (
           <div
             key={index}
-            className=" dark:bg-[#0f0f0f] border border-gray-300 dark:border-gray-700 rounded-xl shadow p-4 flex flex-col gap-3"
+            className="surface-card flex flex-col gap-3 overflow-hidden rounded-lg p-4 transition hover:-translate-y-1 hover:shadow-md"
           >
             <Image
               src={item.image}
               alt={item.patientName}
               width={400}
               height={200}
-              className="w-full h-48 object-cover rounded-md"
+              className="h-48 w-full rounded-md object-cover"
             />
 
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+            <h2 className="text-lg font-semibold text-slate-950 dark:text-white">
               {item.patientName}
             </h2>
 
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-sm text-slate-600 dark:text-slate-300">
               <strong>Disease:</strong> {item.disease}
             </p>
 
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-sm text-slate-600 dark:text-slate-300">
               <strong>Duration:</strong> {item.duration}
             </p>
 
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-sm text-slate-600 dark:text-slate-300">
               <strong>Medicines:</strong>{" "}
               {item.medicinesTaken?.join(", ") || "N/A"}
             </p>
 
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-sm text-slate-600 dark:text-slate-300">
               <strong>Report:</strong> {item.report}
             </p>
 
-            <video controls className="w-full rounded-md border mt-2">
+            <video controls className="mt-2 w-full rounded-md border border-slate-200 dark:border-white/10">
               <source src={item.video} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="mt-2 text-xs text-slate-500">
               <strong>Created:</strong> {moment(item.createdAt).format("LLL")}
             </p>
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-slate-500">
               <strong>Updated:</strong> {moment(item.updatedAt).format("LLL")}
             </p>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

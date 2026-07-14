@@ -5,34 +5,31 @@
 import { useGetOrdersQuery } from '@/redux/features/order/orderSlice';
 import React from 'react';
 
-// Badge generator based on order status
 const getStatusBadge = (status: string) => {
-  let color = '';
+  let color = "bg-slate-100 text-slate-700";
 
   switch (status) {
-    case 'Pending':
-      color = 'bg-yellow-100 text-yellow-800';
+    case "Pending":
+      color = "bg-amber-100 text-amber-800";
       break;
-    case 'Paid':
-      color = 'bg-blue-100 text-blue-800';
+    case "Paid":
+      color = "bg-sky-100 text-sky-800";
       break;
-    case 'Shipped':
-      color = 'bg-indigo-100 text-indigo-800';
+    case "Shipped":
+      color = "bg-indigo-100 text-indigo-800";
       break;
-    case 'Completed':
-      color = 'bg-green-100 text-green-800';
+    case "Completed":
+      color = "bg-emerald-100 text-emerald-800";
       break;
-    case 'Cancelled':
-      color = 'bg-red-100 text-red-800';
+    case "Cancelled":
+      color = "bg-rose-100 text-rose-800";
       break;
     default:
-      color = 'bg-gray-100 text-gray-800';
+      color = "bg-slate-100 text-slate-700";
   }
 
   return (
-    <span
-      className={`text-xs font-semibold px-2 py-1 rounded-full inline-block ${color}`}
-    >
+    <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold ${color}`}>
       {status}
     </span>
   );
@@ -41,51 +38,87 @@ const getStatusBadge = (status: string) => {
 const Page = () => {
   const { data, isLoading, isError } = useGetOrdersQuery(undefined);
   const orders = data?.data || [];
+  const summary = orders.reduce(
+    (acc: { total: number; completed: number; pending: number }, order: any) => {
+      acc.total += 1;
+      if (order.status === "Completed") acc.completed += 1;
+      if (order.status === "Pending") acc.pending += 1;
+      return acc;
+    },
+    { total: 0, completed: 0, pending: 0 }
+  );
 
   if (isLoading) return <p className="p-4">Loading...</p>;
   if (isError) return <p className="p-4 text-red-500">Failed to load orders.</p>;
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl text-center text-violet-600 font-semibold mb-4">Order History</h1>
-
-      {orders.length === 0 ? (
-        <p>No orders found.</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full border-0  shadow-md rounded-md overflow-hidden">
-            <thead>
-              <tr className="bg-gray-600 text-white text-sm uppercase">
-                <th className="px-4 py-3 text-left border">Order ID</th>
-                <th className="px-4 py-3 text-left border">Date</th>
-                <th className="px-4 py-3 text-center border">Products</th>
-                <th className="px-4 py-3 text-left border">Total (৳)</th>
-                <th className="px-4 py-3 text-left border">Status</th>
-                <th className="px-4 py-3 text-left border">Transaction ID</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order: any, index: number) => (
-                <tr
-                  key={order._id}>
-                  <td className="px-4 py-3 border">{order._id}</td>
-                  <td className="px-4 py-3 border">
-                    {new Date(order.createdAt).toLocaleDateString()}
-                  </td>
-                  <td className="px-4 py-3 border text-center">
-                    {order.products?.length}
-                  </td>
-                  <td className="px-4 py-3 border">৳{order.totalPrice}</td>
-                  <td className="px-4 py-3 border">{getStatusBadge(order.status)}</td>
-                  <td className="px-4 py-3 border">
-                    {order.transaction?.id || '—'}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <div className="space-y-6 p-4">
+      <section className="dashboard-card relative overflow-hidden p-6 md:p-8">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-br from-sky-500/25 via-emerald-400/10 to-transparent" />
+        <div className="relative">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-700 dark:text-sky-200">
+            Orders
+          </p>
+          <h1 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">Order History</h1>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+            Track your recent purchases and delivery progress.
+          </p>
+          <div className="mt-5 grid gap-3 md:grid-cols-3">
+            <div className="rounded-2xl border border-sky-200/60 bg-white/70 p-4 text-center shadow-sm dark:border-sky-400/20 dark:bg-slate-900/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Total</p>
+              <p className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">{summary.total}</p>
+            </div>
+            <div className="rounded-2xl border border-emerald-200/60 bg-white/70 p-4 text-center shadow-sm dark:border-emerald-400/20 dark:bg-slate-900/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Completed</p>
+              <p className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">{summary.completed}</p>
+            </div>
+            <div className="rounded-2xl border border-amber-200/60 bg-white/70 p-4 text-center shadow-sm dark:border-amber-400/20 dark:bg-slate-900/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Pending</p>
+              <p className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">{summary.pending}</p>
+            </div>
+          </div>
         </div>
-      )}
+      </section>
+
+      <section className="dashboard-card p-4 md:p-6">
+        {orders.length === 0 ? (
+          <div className="rounded-2xl border border-dashed border-sky-200/70 bg-sky-50/60 p-6 text-center dark:border-sky-400/20 dark:bg-slate-900/60">
+            <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">No orders found yet.</p>
+            <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">New orders will appear here once placed.</p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full">
+              <thead>
+                <tr className="text-left text-xs font-semibold uppercase tracking-wider text-white">
+                  <th className="px-4 py-3">Order ID</th>
+                  <th className="px-4 py-3">Date</th>
+                  <th className="px-4 py-3 text-center">Products</th>
+                  <th className="px-4 py-3">Total (৳)</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3">Transaction ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order: any) => (
+                  <tr key={order._id}>
+                    <td className="px-4 py-3">{order._id}</td>
+                    <td className="px-4 py-3">
+                      {new Date(order.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      {order.products?.length}
+                    </td>
+                    <td className="px-4 py-3">৳{order.totalPrice}</td>
+                    <td className="px-4 py-3">{getStatusBadge(order.status)}</td>
+                    <td className="px-4 py-3">{order.transaction?.id || "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
     </div>
   );
 };

@@ -35,70 +35,82 @@ const handleDelete = async (id: string) => {
     }));
   };
 
-  if (isLoading) return <p className="text-center mt-10">Loading messages...</p>;
-  if (isError) return <p className="text-center mt-10 text-red-500">Failed to load messages.</p>;
+  if (isLoading) return <p className="p-4">Loading messages...</p>;
+  if (isError) return <p className="p-4 text-red-500">Failed to load messages.</p>;
 
   return (
-    <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center dark:text-white">
-        Contact Messages
-      </h1>
-      <div className="overflow-x-auto">
-        <table className="min-w-full border border-gray-200 dark:border-gray-700 text-left">
-          <thead className="bg-gray-100 dark:bg-gray-800">
-            <tr>
-              <th className="py-3 px-4 border-b dark:border-gray-700 text-gray-700 dark:text-gray-200">Name</th>
-              <th className="py-3 px-4 border-b dark:border-gray-700 text-gray-700 dark:text-gray-200">Email</th>
-              <th className="py-3 px-4 border-b dark:border-gray-700 text-gray-700 dark:text-gray-200">Subject</th>
-              <th className="py-3 px-4 border-b dark:border-gray-700 text-gray-700 dark:text-gray-200">Message</th>
-              <th className="py-3 px-4 border-b dark:border-gray-700 text-gray-700 dark:text-gray-200 text-center">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {messages.map((msg: any) => {
-              const isExpanded = expandedMessages[msg._id];
-              const messageToShow =
-                msg.message.length > 20 && !isExpanded
-                  ? `${msg.message.slice(0, 20)}... `
-                  : msg.message;
-              return (
-                <tr key={msg._id} className="text-white dark:hover:bg-gray-800">
-                  <td className="py-3 px-4 border-b dark:border-gray-700  dark:text-gray-200">{msg.name}</td>
-                  <td className="py-3 px-4 border-b dark:border-gray-700 text-blue-600 dark:text-blue-400">{msg.email}</td>
-                  <td className="py-3 px-4 border-b dark:border-gray-700  dark:text-gray-200">{msg.subject}</td>
-                  <td className="py-3 px-4 border-b dark:border-gray-700  dark:text-gray-300">
-                    {messageToShow}
-                    {msg.message.length > 20 && (
+    <div className="space-y-6 p-4">
+      <section className="dashboard-card relative overflow-hidden p-6 md:p-8">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-br from-sky-500/25 via-emerald-400/10 to-transparent" />
+        <div className="relative">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-700 dark:text-sky-200">
+            Messages
+          </p>
+          <h1 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">Inbox Overview</h1>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+            Review patient questions and contact requests.
+          </p>
+        </div>
+      </section>
+
+      <section className="dashboard-card p-4 md:p-6">
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-left text-sm">
+            <thead>
+              <tr>
+                <th className="px-4 py-3">Name</th>
+                <th className="px-4 py-3">Email</th>
+                <th className="px-4 py-3">Subject</th>
+                <th className="px-4 py-3">Message</th>
+                <th className="px-4 py-3 text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {messages.map((msg: any) => {
+                const isExpanded = expandedMessages[msg._id];
+                const messageToShow =
+                  msg.message.length > 20 && !isExpanded
+                    ? `${msg.message.slice(0, 20)}... `
+                    : msg.message;
+                return (
+                  <tr key={msg._id} className="border-t">
+                    <td className="px-4 py-3 font-semibold">{msg.name}</td>
+                    <td className="px-4 py-3 text-sky-700 dark:text-sky-300">{msg.email}</td>
+                    <td className="px-4 py-3">{msg.subject}</td>
+                    <td className="px-4 py-3 text-slate-600 dark:text-slate-300">
+                      {messageToShow}
+                      {msg.message.length > 20 && (
+                        <button
+                          onClick={() => toggleMessage(msg._id)}
+                          className="text-sky-600 hover:underline ml-1"
+                        >
+                          {isExpanded ? "Show less" : "See more"}
+                        </button>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-center">
                       <button
-                        onClick={() => toggleMessage(msg._id)}
-                        className="text-blue-600 hover:underline ml-1"
+                        onClick={() => handleDelete(msg._id)}
+                        className="text-rose-600 hover:text-rose-800"
+                        title="Delete"
                       >
-                        {isExpanded ? "Show less" : "See more"}
+                        <Trash2 className="w-5 h-5 inline" />
                       </button>
-                    )}
-                  </td>
-                  <td className="py-3 px-4 border-b dark:border-gray-700 text-center">
-                    <button
-                      onClick={() => handleDelete(msg._id)}
-                      className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
-                      title="Delete"
-                    >
-                      <Trash2 className="w-5 h-5 inline" />
-                    </button>
+                    </td>
+                  </tr>
+                );
+              })}
+              {messages.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="text-center py-6 text-slate-500 dark:text-slate-400">
+                    No messages found.
                   </td>
                 </tr>
-              );
-            })}
-            {messages.length === 0 && (
-              <tr>
-                <td colSpan={5} className="text-center py-6 text-gray-500 dark:text-gray-400">
-                  No messages found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   );
 };

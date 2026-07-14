@@ -47,25 +47,26 @@ const Dynamic = () => {
   });
 
   return (
-    <section className="w-full  py-16 px-4">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-violet-700 mb-12">
-        Our Service Technology
-      </h2>
+    <section className="section-shell py-16">
+      <div className="mb-10 text-center">
+        <p className="section-kicker">Care infrastructure</p>
+        <h2 className="section-title mt-3">Our Service Technology</h2>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {rotatingImages.map((item, i) => (
           <div
             key={i}
-            className=" shadow-lg rounded-2xl overflow-hidden p-4 transition duration-500 hover:scale-[1.02] hover:shadow-xl"
+            className="surface-card overflow-hidden rounded-lg p-3 transition duration-500 hover:-translate-y-1 hover:shadow-md"
           >
             <Image
               src={item.image}
               alt={item.alt}
               width={400}
               height={300}
-              className="rounded-lg object-cover w-full h-[220px]"
+              className="h-[220px] w-full rounded-md object-cover"
             />
-            <p className="mt-4 text-lg font-semibold text-center">{item.text}</p>
+            <p className="mt-4 text-center text-base font-semibold text-slate-900 dark:text-white">{item.text}</p>
           </div>
         ))}
       </div>

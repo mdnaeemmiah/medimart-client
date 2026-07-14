@@ -70,7 +70,7 @@ const data = {
     },
     {
       title: "Order History",
-      url: "orderHistory",
+      url: "/dashboard/customer/orderHistory",
       icon: SquareTerminal,
       isActive: true,
     },
@@ -89,9 +89,13 @@ const data = {
 
     {
       title: "Settings",
-      url: "#",
+      url: "/dashboard/customer/settings",
       icon: Settings,
       items: [
+        {
+          title: "General",
+          url: "/dashboard/customer/settings",
+        },
         {
           title: "Profile",
           url: "/profile",
@@ -141,7 +145,7 @@ export function CAppSidebar({
             <SidebarMenuButton
               size="lg"
               asChild
-              className="flex items-center justify-center bg-gray-300"
+              className="flex items-center justify-center bg-white/80 ring-1 ring-sky-200/70 backdrop-blur-sm dark:bg-slate-900/70 dark:ring-sky-400/30"
             >
               <Link href="/">
                 <div>

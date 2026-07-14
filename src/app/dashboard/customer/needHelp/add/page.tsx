@@ -91,20 +91,32 @@ const CreateHelpRequest = () => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="max-w-3xl mx-auto mt-10 p-6 bg-[#0A0A0A] rounded-3xl border-2 shadow-md"
+      className="dashboard-card relative mx-auto mt-8 max-w-4xl overflow-hidden rounded-3xl p-6 md:p-8"
     >
-      <h2 className="text-2xl font-semibold mb-6 text-center text-violet-600 dark:text-white">
-        Add Help Request
-      </h2>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-br from-sky-500/25 via-emerald-400/10 to-transparent" />
+      <div className="mb-6 flex flex-col items-center text-center">
+        <span className="rounded-full border border-sky-200/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-sky-700 shadow-sm dark:border-sky-400/30 dark:bg-slate-900/60 dark:text-sky-200">
+          Patient Support
+        </span>
+        <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-white">
+          Add Help Request
+        </h2>
+        <p className="mt-2 max-w-xl text-sm text-slate-600 dark:text-slate-300">
+          Share patient details so our care team can respond quickly.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         <div>
-          <label className="text-sm text-gray-300">Patient Name</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+            Patient Name
+          </label>
           <Input
             name="patientName"
             onChange={formik.handleChange}
             value={formik.values.patientName}
             placeholder="e.g. Michael Johnson"
+            className="dashboard-input mt-2"
           />
           {formik.touched.patientName && formik.errors.patientName && (
             <p className="text-red-500 text-xs mt-1">{formik.errors.patientName}</p>
@@ -112,12 +124,15 @@ const CreateHelpRequest = () => {
         </div>
 
         <div>
-          <label className="text-sm text-gray-300">Disease</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+            Disease
+          </label>
           <Input
             name="disease"
             onChange={formik.handleChange}
             value={formik.values.disease}
             placeholder="e.g. Chronic Kidney Disease"
+            className="dashboard-input mt-2"
           />
           {formik.touched.disease && formik.errors.disease && (
             <p className="text-red-500 text-xs mt-1">{formik.errors.disease}</p>
@@ -125,12 +140,15 @@ const CreateHelpRequest = () => {
         </div>
 
         <div>
-          <label className="text-sm text-gray-300">Duration</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+            Duration
+          </label>
           <Input
             name="duration"
             onChange={formik.handleChange}
             value={formik.values.duration}
             placeholder="e.g. 2 years"
+            className="dashboard-input mt-2"
           />
           {formik.touched.duration && formik.errors.duration && (
             <p className="text-red-500 text-xs mt-1">{formik.errors.duration}</p>
@@ -138,12 +156,15 @@ const CreateHelpRequest = () => {
         </div>
 
         <div>
-          <label className="text-sm text-gray-300">Medicines Taken</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+            Medicines Taken
+          </label>
           <Input
             name="medicinesTaken"
             onChange={formik.handleChange}
             value={formik.values.medicinesTaken}
             placeholder="e.g. Furosemide, Lisinopril"
+            className="dashboard-input mt-2"
           />
           {formik.touched.medicinesTaken && formik.errors.medicinesTaken && (
             <p className="text-red-500 text-xs mt-1">{formik.errors.medicinesTaken}</p>
@@ -151,13 +172,15 @@ const CreateHelpRequest = () => {
         </div>
       </div>
 
-      <div className="mt-4">
-        <label className="text-sm text-gray-300">Report</label>
+      <div className="mt-6">
+        <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+          Report
+        </label>
         <textarea
           name="report"
           onChange={formik.handleChange}
           value={formik.values.report}
-          className="w-full p-2 border rounded mt-1"
+          className="dashboard-textarea mt-2 min-h-[130px] w-full"
           placeholder="e.g. Patient requires ongoing dialysis; kidney function stable."
         />
         {formik.touched.report && formik.errors.report && (
@@ -165,13 +188,18 @@ const CreateHelpRequest = () => {
         )}
       </div>
 
-      <div className="mt-4">
-        <label className="text-sm text-gray-300">Upload Patient Image</label>
-        <Upload beforeUpload={(file) => handleUpload(file, "image")} showUploadList={false}>
-          <Button icon={<UploadOutlined />} loading={loading}>
-            {loading ? "Uploading..." : "Upload Image"}
-          </Button>
-        </Upload>
+      <div className="mt-6 rounded-2xl border border-dashed border-sky-200/70 bg-gradient-to-br from-white/80 via-white/70 to-sky-50/60 p-4 shadow-sm dark:border-sky-400/20 dark:from-slate-900/70 dark:via-slate-900/60 dark:to-slate-950/70">
+        <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+          Upload Patient Image
+        </label>
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <Upload beforeUpload={(file) => handleUpload(file, "image")} showUploadList={false}>
+            <Button icon={<UploadOutlined />} loading={loading} className="border-sky-200 text-sky-700">
+              {loading ? "Uploading..." : "Upload Image"}
+            </Button>
+          </Upload>
+          <p className="text-xs text-slate-500 dark:text-slate-400">JPG or PNG, up to 10MB.</p>
+        </div>
         {imageUrl && (
           <div className="mt-3">
             <Image src={imageUrl} alt="Patient" width={100} height={100} className="rounded border" />
@@ -179,13 +207,18 @@ const CreateHelpRequest = () => {
         )}
       </div>
 
-      <div className="mt-4">
-        <label className="text-sm text-gray-300">Upload Medical Report Video</label>
-        <Upload beforeUpload={(file) => handleUpload(file, "video")} showUploadList={false}>
-          <Button icon={<UploadOutlined />} loading={loading}>
-            {loading ? "Uploading..." : "Upload Video"}
-          </Button>
-        </Upload>
+      <div className="mt-6 rounded-2xl border border-dashed border-sky-200/70 bg-gradient-to-br from-white/80 via-white/70 to-emerald-50/60 p-4 shadow-sm dark:border-sky-400/20 dark:from-slate-900/70 dark:via-slate-900/60 dark:to-slate-950/70">
+        <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+          Upload Medical Report Video
+        </label>
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <Upload beforeUpload={(file) => handleUpload(file, "video")} showUploadList={false}>
+            <Button icon={<UploadOutlined />} loading={loading} className="border-sky-200 text-sky-700">
+              {loading ? "Uploading..." : "Upload Video"}
+            </Button>
+          </Upload>
+          <p className="text-xs text-slate-500 dark:text-slate-400">MP4 preferred, up to 50MB.</p>
+        </div>
         {videoUrl && (
           <video controls className="mt-3 w-full max-w-md rounded border">
             <source src={videoUrl} type="video/mp4" />
@@ -193,10 +226,13 @@ const CreateHelpRequest = () => {
         )}
       </div>
 
-      <div className="mt-6 text-center">
-        <Button type="primary" htmlType="submit">
-          Submit
+      <div className="mt-8 flex flex-col items-center gap-2 text-center">
+        <Button type="primary" htmlType="submit" className="h-10 px-8 shadow-lg shadow-sky-500/20">
+          Submit Request
         </Button>
+        <p className="text-xs text-slate-500 dark:text-slate-400">
+          You will receive a notification after review.
+        </p>
       </div>
     </form>
   );

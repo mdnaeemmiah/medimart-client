@@ -89,21 +89,32 @@ const CreateMedicine = () => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="max-w-2xl mx-auto mt-10 p-6 bg-[#0A0A0A] rounded-3xl border-2 shadow-md"
+      className="dashboard-card relative mx-auto mt-8 max-w-4xl overflow-hidden rounded-3xl p-6 md:p-8"
     >
-      <h2 className="text-2xl font-semibold mb-6 text-center text-violet-600 dark:text-white">
-        Add Medicine Request
-      </h2>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-br from-sky-500/25 via-emerald-400/10 to-transparent" />
+      <div className="mb-6 flex flex-col items-center text-center">
+        <span className="rounded-full border border-sky-200/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-sky-700 shadow-sm dark:border-sky-400/30 dark:bg-slate-900/60 dark:text-sky-200">
+          Medicine Request
+        </span>
+        <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-white">
+          Add Medicine Request
+        </h2>
+        <p className="mt-2 max-w-xl text-sm text-slate-600 dark:text-slate-300">
+          Provide medicine details so we can process the request faster.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         <div>
-          <label className="block mb-1 text-sm text-gray-300">Medicine Name</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+            Medicine Name
+          </label>
           <input
             type="text"
             name="medicineName"
             onChange={formik.handleChange}
             value={formik.values.medicineName}
-            className="w-full p-2 border rounded"
+            className="dashboard-input mt-2 w-full"
             placeholder="e.g. Salbutamol Inhaler"
           />
           {formik.touched.medicineName && formik.errors.medicineName && (
@@ -112,9 +123,11 @@ const CreateMedicine = () => {
         </div>
 
         <div>
-          <label className="block mb-1 text-sm text-gray-300">Need Date</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+            Need Date
+          </label>
           <DatePicker
-            className="w-full"
+            className="dashboard-input mt-2 w-full"
             onChange={(date) => {
               const isoDate = date ? date.toISOString() : "";
               formik.setFieldValue("needDate", isoDate);
@@ -127,13 +140,15 @@ const CreateMedicine = () => {
         </div>
 
         <div>
-          <label className="block mb-1 text-sm text-gray-300">Contact Number</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+            Contact Number
+          </label>
           <input
             type="text"
             name="contactNumber"
             onChange={formik.handleChange}
             value={formik.values.contactNumber}
-            className="w-full p-2 border rounded"
+            className="dashboard-input mt-2 w-full"
             placeholder="01XXXXXXXXX"
           />
           {formik.touched.contactNumber && formik.errors.contactNumber && (
@@ -142,13 +157,15 @@ const CreateMedicine = () => {
         </div>
 
         <div>
-          <label className="block mb-1 text-sm text-gray-300">Requester Name</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+            Requester Name
+          </label>
           <input
             type="text"
             name="requesterName"
             onChange={formik.handleChange}
             value={formik.values.requesterName}
-            className="w-full p-2 border rounded"
+            className="dashboard-input mt-2 w-full"
             placeholder="e.g. Tanvir Hasan"
           />
           {formik.touched.requesterName && formik.errors.requesterName && (
@@ -157,13 +174,15 @@ const CreateMedicine = () => {
         </div>
 
         <div>
-          <label className="block mb-1 text-sm text-gray-300">Location</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+            Location
+          </label>
           <input
             type="text"
             name="location"
             onChange={formik.handleChange}
             value={formik.values.location}
-            className="w-full p-2 border rounded"
+            className="dashboard-input mt-2 w-full"
             placeholder="e.g. Rajshahi, Bangladesh"
           />
           {formik.touched.location && formik.errors.location && (
@@ -172,29 +191,38 @@ const CreateMedicine = () => {
         </div>
 
         <div>
-          <label className="block mb-1 text-sm text-gray-300">Status</label>
-          <Select
-            value={formik.values.status}
-            onChange={(value) => formik.setFieldValue("status", value)}
-            className="w-full"
-            options={[
-              { label: "Pending", value: "pending" },
-              { label: "Fulfilled", value: "fulfilled" },
-            ]}
-          />
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+            Status
+          </label>
+          <div className="dashboard-select-wrap mt-2">
+            <Select
+              value={formik.values.status}
+              onChange={(value) => formik.setFieldValue("status", value)}
+              className="dashboard-select w-full"
+              options={[
+                { label: "Pending", value: "pending" },
+                { label: "Fulfilled", value: "fulfilled" },
+              ]}
+            />
+          </div>
           {formik.touched.status && formik.errors.status && (
             <p className="text-red-500 text-xs mt-1">{formik.errors.status}</p>
           )}
         </div>
       </div>
 
-      <div className="mt-4">
-        <label className="block mb-1 text-sm text-gray-300">Medicine Image</label>
-        <Upload beforeUpload={handleImageUpload} showUploadList={false}>
-          <Button icon={<UploadOutlined />} loading={loading}>
-            {loading ? "Uploading..." : "Upload Image"}
-          </Button>
-        </Upload>
+      <div className="mt-6 rounded-2xl border border-dashed border-sky-200/70 bg-gradient-to-br from-white/80 via-white/70 to-sky-50/60 p-4 shadow-sm dark:border-sky-400/20 dark:from-slate-900/70 dark:via-slate-900/60 dark:to-slate-950/70">
+        <label className="text-sm font-medium text-slate-700 dark:text-slate-200">
+          Medicine Image
+        </label>
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <Upload beforeUpload={handleImageUpload} showUploadList={false}>
+            <Button icon={<UploadOutlined />} loading={loading} className="border-sky-200 text-sky-700">
+              {loading ? "Uploading..." : "Upload Image"}
+            </Button>
+          </Upload>
+          <p className="text-xs text-slate-500 dark:text-slate-400">JPG or PNG, up to 10MB.</p>
+        </div>
         {imageUrl && (
           <div className="mt-4 text-center">
             <Image
@@ -209,10 +237,11 @@ const CreateMedicine = () => {
         )}
       </div>
 
-      <div className="mt-6 text-center">
-        <Button type="primary" htmlType="submit">
+      <div className="mt-8 flex flex-col items-center gap-2 text-center">
+        <Button type="primary" htmlType="submit" className="h-10 px-8 shadow-lg shadow-sky-500/20">
           Submit
         </Button>
+        <p className="text-xs text-slate-500 dark:text-slate-400">We will review and respond shortly.</p>
       </div>
     </form>
   );

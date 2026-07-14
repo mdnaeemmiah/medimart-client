@@ -7,13 +7,12 @@ import Image from "next/image";
 import {
   useGetDoctorsQuery,
   useDeleteDoctorMutation,
-  useUpdateDoctorMutation
+  useUpdateDoctorMutation,
 } from "@/redux/features/doctor/doctorSlice";
 import { Trash2, Pencil } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 
-// Modal Component for Editing
 const EditDoctorModal = ({
   doctor,
   onClose,
@@ -22,7 +21,6 @@ const EditDoctorModal = ({
   onClose: () => void;
 }) => {
   const [updateDoctor, { isLoading: updating }] = useUpdateDoctorMutation();
-
   const [formData, setFormData] = useState({
     name: doctor.name || "",
     hospital: doctor.hospital || "",
@@ -47,17 +45,20 @@ const EditDoctorModal = ({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">
-      <div className="border-2 rounded p-6 w-full max-w-md shadow-lg">
-        <h2 className="text-lg font-semibold mb-4">Edit Doctor</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 px-4 backdrop-blur-sm">
+      <div className="dashboard-card w-full max-w-md p-6">
+        <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Edit Doctor</h2>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+          Update doctor availability and timing.
+        </p>
+        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Doctor Name"
-            className="w-full border px-3 py-2 rounded"
+            placeholder="Doctor name"
+            className="dashboard-input w-full"
             required
           />
           <input
@@ -66,7 +67,7 @@ const EditDoctorModal = ({
             value={formData.hospital}
             onChange={handleChange}
             placeholder="Hospital"
-            className="w-full border px-3 py-2 rounded"
+            className="dashboard-input w-full"
             required
           />
           <input
@@ -75,7 +76,7 @@ const EditDoctorModal = ({
             value={formData.date}
             onChange={handleChange}
             placeholder="Date"
-            className="w-full border px-3 py-2 rounded"
+            className="dashboard-input w-full"
             required
           />
           <input
@@ -84,7 +85,7 @@ const EditDoctorModal = ({
             value={formData.time}
             onChange={handleChange}
             placeholder="Time"
-            className="w-full border px-3 py-2 rounded"
+            className="dashboard-input w-full"
             required
           />
           <input
@@ -93,13 +94,13 @@ const EditDoctorModal = ({
             value={formData.day}
             onChange={handleChange}
             placeholder="Day"
-            className="w-full border px-3 py-2 rounded"
+            className="dashboard-input w-full"
             required
           />
-          <div className="flex justify-end space-x-2">
+          <div className="flex justify-end gap-3">
             <button
               type="button"
-              className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+              className="muted-action rounded-full px-4 py-2 text-sm font-semibold"
               onClick={onClose}
             >
               Cancel
@@ -107,7 +108,7 @@ const EditDoctorModal = ({
             <button
               type="submit"
               disabled={updating}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="primary-action rounded-full px-4 py-2 text-sm font-semibold"
             >
               {updating ? "Updating..." : "Update"}
             </button>
@@ -121,9 +122,7 @@ const EditDoctorModal = ({
 const DoctorsAllPage = () => {
   const { data, isLoading, isError, refetch } = useGetDoctorsQuery(undefined);
   const [deleteDoctor] = useDeleteDoctorMutation();
-
   const doctors = data?.data || [];
-
   const [editingDoctor, setEditingDoctor] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -146,78 +145,94 @@ const DoctorsAllPage = () => {
   const closeModal = () => {
     setEditingDoctor(null);
     setIsModalOpen(false);
-    refetch(); // refetch doctors list to update UI after modal close
+    refetch();
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Error fetching doctors.</p>;
+  if (isLoading) return <p className="p-4">Loading...</p>;
+  if (isError) return <p className="p-4 text-red-500">Error fetching doctors.</p>;
 
   return (
-    <div className="p-4">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-semibold mb-4">All Doctors</h2>
-        <Link href="/dashboard/admin/doctors/add">
-          <button className="border-2 border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white transition">
+    <div className="space-y-6 p-4">
+      <section className="dashboard-card relative overflow-hidden p-6 md:p-8">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-br from-emerald-500/25 via-sky-400/10 to-transparent" />
+        <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-700 dark:text-emerald-200">
+              Doctors
+            </p>
+            <h1 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">Doctor Directory</h1>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+              Manage schedules, availability, and clinic assignments.
+            </p>
+          </div>
+          <Link
+            href="/dashboard/admin/doctors/add"
+            className="primary-action inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-semibold"
+          >
             Add Doctor
-          </button>
-        </Link>
-      </div>
+          </Link>
+        </div>
+      </section>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full border border-gray-200 text-left text-sm">
-          <thead className="bg-gray-100 text-gray-700">
-            <tr>
-              <th className="p-3 border">#</th>
-              <th className="p-3 border">Image</th>
-              <th className="p-3 border">Name</th>
-              <th className="p-3 border">Hospital</th>
-              <th className="p-3 border">Date</th>
-              <th className="p-3 border">Time</th>
-              <th className="p-3 border">Day</th>
-              <th className="p-3 border">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {doctors.map((doctor: any, i: any) => (
-              <tr key={doctor._id} className="border-t">
-                <td className="p-3 border">{i + 1}</td>
-                <td className="p-3 border w-20">
-                  {doctor.image ? (
-                    <Image
-                      src={doctor.image}
-                      alt={doctor.name}
-                      width={50}
-                      height={50}
-                      className="rounded-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-12 h-12 bg-gray-300 rounded-full" />
-                  )}
-                </td>
-                <td className="p-3 border">{doctor.name}</td>
-                <td className="p-3 border">{doctor.hospital}</td>
-                <td className="p-3 border">{doctor.date}</td>
-                <td className="p-3 border">{doctor.time}</td>
-                <td className="p-3 border">{doctor.day}</td>
-                <td className="p-3 border space-x-2">
-                  <button
-                    className="text-blue-600 hover:text-blue-800"
-                    onClick={() => handleEdit(doctor)}
-                  >
-                    <Pencil size={18} />
-                  </button>
-                  <button
-                    className="text-red-600 hover:text-red-800"
-                    onClick={() => handleDelete(doctor._id)}
-                  >
-                    <Trash2 size={18} />
-                  </button>
-                </td>
+      <section className="dashboard-card p-4 md:p-6">
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-left text-sm">
+            <thead>
+              <tr>
+                <th className="px-4 py-3">#</th>
+                <th className="px-4 py-3">Image</th>
+                <th className="px-4 py-3">Name</th>
+                <th className="px-4 py-3">Hospital</th>
+                <th className="px-4 py-3">Date</th>
+                <th className="px-4 py-3">Time</th>
+                <th className="px-4 py-3">Day</th>
+                <th className="px-4 py-3">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {doctors.map((doctor: any, i: number) => (
+                <tr key={doctor._id} className="border-t">
+                  <td className="px-4 py-3">{i + 1}</td>
+                  <td className="px-4 py-3">
+                    {doctor.image ? (
+                      <Image
+                        src={doctor.image}
+                        alt={doctor.name}
+                        width={44}
+                        height={44}
+                        className="rounded-full object-cover"
+                      />
+                    ) : (
+                      <div className="h-11 w-11 rounded-full bg-slate-200" />
+                    )}
+                  </td>
+                  <td className="px-4 py-3 font-semibold">{doctor.name}</td>
+                  <td className="px-4 py-3">{doctor.hospital}</td>
+                  <td className="px-4 py-3">{doctor.date}</td>
+                  <td className="px-4 py-3">{doctor.time}</td>
+                  <td className="px-4 py-3">{doctor.day}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      <button
+                        className="text-emerald-600 hover:text-emerald-800"
+                        onClick={() => handleEdit(doctor)}
+                      >
+                        <Pencil size={18} />
+                      </button>
+                      <button
+                        className="text-rose-600 hover:text-rose-800"
+                        onClick={() => handleDelete(doctor._id)}
+                      >
+                        <Trash2 size={18} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       {isModalOpen && editingDoctor && (
         <EditDoctorModal doctor={editingDoctor} onClose={closeModal} />

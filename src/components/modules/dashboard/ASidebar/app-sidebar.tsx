@@ -83,22 +83,26 @@ const data = {
     // },
     {
       title: "OrderManage",
-      url: "orderManage",
+      url: "/dashboard/admin/orderManage",
       icon: SquareTerminal,
       isActive: true,
     },
     {
       title: "MessageManage",
-      url: "message",
+      url: "/dashboard/admin/message",
       icon: SquareTerminal,
       isActive: true,
     },
 
     {
       title: "Settings",
-      url: "#",
+      url: "/dashboard/admin/settings",
       icon: Settings,
       items: [
+        {
+          title: "General",
+          url: "/dashboard/admin/settings",
+        },
         {
           title: "Profile",
           url: "/profile",
@@ -148,7 +152,7 @@ export function AAppSidebar({
             <SidebarMenuButton
               size="lg"
               asChild
-              className="flex items-center justify-center bg-gray-300"
+              className="flex items-center justify-center bg-white/80 ring-1 ring-emerald-200/70 backdrop-blur-sm dark:bg-slate-900/70 dark:ring-emerald-400/30"
             >
               <Link href="/">
                 <div>
