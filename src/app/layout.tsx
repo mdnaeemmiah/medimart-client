@@ -1,11 +1,8 @@
-"use client";
 // import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "sonner";
 // import { SessionProvider } from "next-auth/react";
-import { Provider } from "react-redux";
-import { store } from "@/redux/store";
+import Providers from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,13 +26,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body cz-shortcut-listen="true"   suppressHydrationWarning={true}
+      <body
+        cz-shortcut-listen="true"
+        suppressHydrationWarning={true}
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-         <Toaster richColors position="top-center" />
-         <Provider store={store}>
-             {children}
-          </Provider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

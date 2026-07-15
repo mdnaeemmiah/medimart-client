@@ -39,7 +39,7 @@ import {
 } from "@/redux/features/cart/cartSlice";
 import { useCreateOrderMutation } from "@/redux/features/order/orderSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { logout } from "@/redux/features/auth/authSlice";
+import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import img1 from "../../app/assets/logo-removebg-preview.png";
 import Theme from "./Theme";
 
@@ -53,11 +53,19 @@ const links = [
 
 const CartSheet = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
+  const user = useAppSelector(selectCurrentUser);
   const cartData = useAppSelector((state) => state.cart);
   const [createOrder, { isLoading, isSuccess, data, isError, error }] =
     useCreateOrderMutation();
 
   const handlePlaceOrder = async () => {
+    if (!user) {
+      toast.error("Please login first.");
+      router.push("/login");
+      return;
+    }
+
     await createOrder({
       products: cartData.items.map(({ product, quantity }) => ({
         product,
@@ -136,7 +144,7 @@ const CartSheet = () => {
                             updateQuantity({
                               id: item.product,
                               quantity: Math.max(item.quantity - 1, 1),
-                            })
+                            }),
                           )
                         }
                         aria-label={`Decrease ${item.name}`}
@@ -155,7 +163,7 @@ const CartSheet = () => {
                             updateQuantity({
                               id: item.product,
                               quantity: Math.min(item.quantity + 1, item.stock),
-                            })
+                            }),
                           )
                         }
                         aria-label={`Increase ${item.name}`}
@@ -232,8 +240,8 @@ export default function Navbar() {
     userRole === "admin"
       ? "/dashboard/admin/adminDashboard"
       : userRole === "customer"
-      ? "/dashboard/customer/customerDashboard"
-      : "/dashboard";
+        ? "/dashboard/customer/customerDashboard"
+        : "/dashboard";
 
   const handleLogout = () => {
     dispatch(logout());
@@ -281,7 +289,10 @@ export default function Navbar() {
           <Theme />
 
           {!user ? (
-            <Button className="primary-action hidden rounded-full px-5 sm:inline-flex" asChild>
+            <Button
+              className="primary-action hidden rounded-full px-5 sm:inline-flex"
+              asChild
+            >
               <Link href="/login">Login</Link>
             </Button>
           ) : (
@@ -301,7 +312,10 @@ export default function Navbar() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href={dashboardRoute} className="flex items-center gap-2">
+                  <Link
+                    href={dashboardRoute}
+                    className="flex items-center gap-2"
+                  >
                     <LayoutDashboard className="size-4" />
                     Dashboard
                   </Link>
@@ -324,7 +338,11 @@ export default function Navbar() {
             onClick={() => setIsMenuOpen((value) => !value)}
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            {isMenuOpen ? (
+              <X className="size-5" />
+            ) : (
+              <Menu className="size-5" />
+            )}
           </Button>
         </div>
       </nav>

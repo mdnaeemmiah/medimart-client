@@ -2,10 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { BadgeCheck, CalendarClock, Factory, Package, ShoppingCart } from "lucide-react";
+import { useRouter } from "next/navigation";
+import {
+  BadgeCheck,
+  CalendarClock,
+  Factory,
+  Package,
+  ShoppingCart,
+} from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { useAppDispatch } from "@/redux/hooks";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addToCart } from "@/redux/features/cart/cartSlice";
 import { getMedicines } from "@/service/shopService";
 
@@ -28,7 +36,9 @@ interface MedicineType {
 const MedicineShop = () => {
   const [medicines, setMedicines] = useState<MedicineType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
   const dispatch = useAppDispatch();
+  const user = useAppSelector(selectCurrentUser);
 
   useEffect(() => {
     const fetchMedicines = async () => {
@@ -48,6 +58,12 @@ const MedicineShop = () => {
   }, []);
 
   const handleAddToCart = (medicine: MedicineType) => {
+    if (!user) {
+      toast.error("Please login first.");
+      router.push("/login");
+      return;
+    }
+
     dispatch(
       addToCart({
         product: medicine._id,
@@ -56,7 +72,7 @@ const MedicineShop = () => {
         quantity: 1,
         stock: medicine.stock,
         imageUrl: "/medicine.svg",
-      })
+      }),
     );
     toast.success(`${medicine.name} added to cart.`);
   };
@@ -133,7 +149,10 @@ const MedicineShop = () => {
               </div>
 
               <div className="mt-6 flex gap-3">
-                <Button className="primary-action flex-1 rounded-lg" onClick={() => handleAddToCart(medicine)}>
+                <Button
+                  className="primary-action flex-1 rounded-lg"
+                  onClick={() => handleAddToCart(medicine)}
+                >
                   <ShoppingCart className="size-4" />
                   Add
                 </Button>
